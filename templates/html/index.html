@@ -1,0 +1,176 @@
+<!DOCTYPE html> 
+ 
+<html lang="en"> 
+<head> 
+<meta charset="utf-8" /> 
+<!--[if lt IE 9]>
+<script src="/static/js/html5.js"></script>
+<![endif]--> 
+	<title>HR4E Forms</title>
+   	<link rel="shortcut icon" href="static/favicon.ico" > 
+   	<script type="text/javascript" src="/static/js/jquery.min.js"></script> 
+    	<script type="text/javascript" src="/static/js/hr4e.js"></script> 
+    	<link rel="stylesheet" type="text/css" href="/static/css/super.css" />
+</head>
+<script>
+//This is pulled out of hr4e.js so that I can manage my tab locations...
+//You can use the show method in ready. 
+//This method takes in a tag and an anchor. The two comes from views.py
+//Then, tag is used to load the appropriate tab in each accordion section.
+//Anchor is used to hover over the appropriate accordion section.
+//Basically, I am maintaining a user's current position on the form...
+$(document).ready(function() {
+	$(".tab_content").hide(); //Hide all content
+	var loadTab = "{{ tag }}";
+	location.href = "#{{ anchor }}"
+	$("ul.tabs li:nth-child({{ tag }})").addClass("active").fadeIn();
+	//$(loadTab).addClass("active").fadeIn();
+	//t=$('#tab_container').tabs();
+	//t.tabs('select',{{tag}});
+	//alert($("ul.tabs li:first"));
+	//alert(loadTab);
+	$(".tab_content:nth-child({{ tag }})").fadeIn();
+	$("ul.tabs li").click(function() {
+		$("ul.tabs li").removeClass("active"); 
+		$(this).addClass("active"); 
+		$(".tab_content").hide(); 
+		//var activeTab = $(this).find("a").attr("href"); 
+		var activeTab = $(this).find("a").attr("href");
+		$(activeTab).fadeIn();
+		return false;
+	});
+});
+
+</script>
+<!--
+Ok, each of the below sections labeled <section *> represents an accordion section... 
+The overall page architecture is as follows:
++ Generic Accordion section
+	-tab1
+	-tab2
+	-tab3
+
++ Intake (found in intake.html)
+	-demographics
+	-nutrition
+	-review
++ Triage (found in triage.html)
+	-chief complaint
+	-vitals
+	-red flags
+	-vaccines
+	-review
++ Clinician (you get the idea)
+	-tests
+	-findings
+	-assessments
+	-plan of care
+	-review
++ Lab_Pharmacy
+	-lab orders
+	-review
++ Exit
+	-big old button
+
+-->
+<body class="showgrid"> 
+<div id="options"><!--
+<br/><br/>
+<br/>
+
+{% if patient.file_error %}
+	<h2><font color="red">{{ patient.file_error }}</font></h2><br/>
+{% endif %}
+-->
+{% if anchor == 'intake' %}
+<form action="" method ="POST">
+<input type="submit" name="new_patient" value="New Patient" />
+</form>
+{% endif %}
+<br/>
+<a href="javascript:parentAccordion.pr(1)"><em>Open all</em></a> <br /><a href="javascript:parentAccordion.pr(-1)"><em>Close all</em></a><br/><a href = "../administrator/"><em>Administration</em></a><br/><br/><br/>
+<form action="" method ="POST">
+<input type="submit" name="load_patient" value="Load Patient" />
+</form>
+</div> 
+<header> 
+	<hgroup> 
+		<h1><strong><img id = "logo" src="/static/hr4e.png"/></strong></h1><br/>
+		<br class="clear" /><br class="clear" /><br class="clear" />
+		<br class="clear" /><br class="clear" /><br class="clear" /><br/><br/><br/>
+	</hgroup> 
+ <br class="clear" /><br class="clear" /><br class="clear" />
+<br/>
+</header> 
+<br/><br/><br/>
+<div class="accordion" id="accordion">
+<section class="intake">	
+<!-- *****************************************************************************************
+					Intake								
+-->
+
+
+{% include "intake.html" %}
+</section> 
+
+
+<section class="triage"> 
+<!-- ******************************************************************************************
+					Triage		
+-->	
+{% include "triage.html" %}
+
+</section>
+
+
+<section class="clinician"> 
+<!-- ******************************************************************************************
+					Clinician				
+-->	 
+
+{% include "clinician.html" %}    
+
+
+</section> 
+
+
+<section class="lab_pharmacy">	
+<!-- ******************************************************************************************
+					Lab | Pharmacy
+-->
+{% include "lab_pharmacy.html" %}
+</section> 
+
+
+<section class="exit">	
+<!-- ******************************************************************************************
+					Exit 
+-->
+{% include "exit.html" %}
+</section> 
+ 
+
+</div> 
+<!-- class="accordion" id="accordion" --> 
+<br class="clear" /> 
+ 
+ 
+<!-- ******************************************************************************************
+					Footer		 
+     ****************************************************************************************** --> 
+<footer class="r15"> 
+<small><a href="http://www.hr4e.org" title="HR4E">HR4E </a></small> 
+</footer> 
+ 
+<!-- OK, notice {{ station }}.
+{{ station }} will load the appropriate accordion section [0,4] for each section above
+IE: {{ station }} = 0 means that the Intake Station will load.
+-->
+<script type="text/javascript"> 
+var parentAccordion=new TINY.accordion.slider("parentAccordion");
+parentAccordion.init("accordion","h1",0,{{ station }}, "accordion-selected");
+</script> 
+ 
+</body> 
+</html>
+

@@ -1,0 +1,64 @@
+<h1 title="click to view or hide lab information"><span id = "exit" ><a id ="exit" name="exit"><strong>Exit Station</strong></a></span></h1> 
+<div class="accordion-section" id="exit" style="height:0px"> <!--to hide style="height:0px" onload--> 
+	
+	
+	 <!-- {% include "patientdataheader.html" %} -->
+	<div class = "r12">
+	<strong>Patient ID: </strong> {{ patient.id }} <br/>
+	<strong>Patient Name: </strong> {{ patient.family_name }}, {{ patient.given_name }} <br/>
+	<strong>Chief Complaint: </strong> {{ patient.chief_complaint }} <br/>
+	<strong>Languages: </strong> {% for language in patient.languages %}{{ language }}, {% endfor %}<br/><!--{% for language in patient.languages %} {{language}} {% endfor %}-->
+	<strong>Patient DOB: </strong> {{patient.dob}} <br/>
+	<strong>Patient Stated Age: </strong> {{ patient.stated_age }} <br/>
+	<strong>Patient Estimated Age:</strong>  {{ patient.estimated_age }} <br/>
+	<strong>Patient Status in School: </strong> {{ patient.school_status }} Year in School: {{ patient.school_year }}  <br/>
+	<strong>Patient Tribe:</strong>{{ patient.tribe }} ; <strong>Present Village:</strong> {{ patient.present_village }} ; <strong>Home Village:</strong> {{ patient.home_village }} <br/>
+	<br/>	
+	<strong>Support: </strong> <br/>
+		
+					&nbsp;&nbsp;&nbsp;&nbsp;<strong>School:</strong> {{patient.school}}, <strong>Name: </strong>{{patient.teacher}}
+				<br/><br/>
+	<strong>Immunizations: </strong> <br/>
+		{% for immunization in patient.vaccinations %} 
+			{% for name,text in immunization.items %}
+					&nbsp;&nbsp;&nbsp;&nbsp;{{ name }} : {{ text }}
+				{% endfor %}<br/>
+		{% endfor %}<br/>
+	<strong>Vitals: </strong> <br/>
+		{% for vital in patient.vitals %} 
+			{% for name,text in vital.items %}
+					&nbsp;&nbsp;&nbsp;&nbsp;{{ name }} : {{ text }}
+				{% endfor %}<br/>
+		{% endfor %}<br/>
+	<strong>Assessments: </strong> <br/>
+		{% for assessment in patient.assessments %} 
+			{% for name,text in assessment.items %}
+					&nbsp;&nbsp;&nbsp;&nbsp;{{ name }} : {{ text }}
+				{% endfor %}<br/>
+		{% endfor %}<br/>
+	<strong>Plans of Care: </strong> <br/>
+		{% for plan_of_care in patient.plans_of_care %} 
+			{% for name,text in plan_of_care.items %}
+					&nbsp;&nbsp;&nbsp;&nbsp;{{ name }} : {{ text }}
+				{% endfor %}<br/>
+		{% endfor %}<br/>
+<!--
+<strong>Chief Complaint:</strong> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp; {{patient.chief_complaint}}
+	<br/>
+	-->
+
+<div>
+<br/><br/><br/>
+	<form action="" method ="POST">
+		<input type="submit" name="write_xml" value="Create Patient CCD">
+	</form>
+</div>
+
+
+ 	</div>
+
+<br class="clear" /> 
+<h1>Welcome to the Exit Station</h1>
+
+</div> <!-- accordion section --> 

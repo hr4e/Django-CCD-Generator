@@ -1,0 +1,72 @@
+<h1 title="click to view or hide lab information"><span id ="lab_pharmacy"><a id = "lab_pharmacy" name="lab_pharmacy"><strong>Lab | Pharmacy Station</strong></a></span></h1> 
+<div class="accordion-section" id="lab_pharmacy" style="height:0px"> <!--to hide style="height:0px" onload--> 
+	<nav> 
+		<ul class="tabs"> 
+			<li class="lab_pharmacy"><a href="#pharmacy_entry" title="pharma_entry">Entry</a></li> 
+			<li class="lab_pharmacy"><a href="#pharmacy_review" title="Review">Review</a></li> 
+	    	</ul> 
+    	</nav> 
+	
+<div class="tab_container"> 
+	<article id="pharmacy_entry" class="tab_content"> 
+	{% include "patientdataheader.html" %}
+	<div class="r12 left"> 
+		<h2>Edit Lab Orders</h2>
+	<!-- create a text field for each dictionary that has 'yes' for Lab Order?-->
+	<!-- We need three fields: Order, Action# and Comment -->
+	<!-- We should consider...I should consider using a separate variable for lab orders -->
+	<!-- I could use an update function that updates the plans_of_care and lab_pharmacy-->
+	<!-- The above sentence is a bad idea: Updating both when one changes will be a pain...-->
+	<!-- Only needs to edit in place...no need to have adds for this form -->
+		<form action="" method ="POST">
+			{% for plan in patient.plans_of_care %}
+				{% if plan.Lab_Order == 'yes' %}
+					<h4><strong>Order: #/{{ plan.Action_Number }}:</strong></h4>			
+					<input type="text" name ="order{{forloop.counter0}}" size = "100" value= "{{ plan.Order }}">
+					<h4><strong>Comment:</strong></h4>
+					<input type="text" name ="comment{{forloop.counter0}}" size = "100" value= "{{ plan.Comment }}">
+					<br/>
+					<br/>
+					<br/>
+				{% endif %}
+				{% empty %}
+					<li><strong>Sorry, there are no lab orders to be found.</strong></li>
+			{% endfor %}
+			{% if patient.plans_of_care%}
+				<input type="submit" name="update_order" value="Update Orders">
+			{% endif %}
+			
+		</form>
+	</div>
+	</article> 
+
+	<article id="pharmacy_review" class="tab_content"> 
+	
+	<div class="r12 left"> 
+		<h3> Lab and Pharmacy Orders</h3>
+				<ul>
+					{% for plan in patient.plans_of_care %}
+							{% for key,value in plan.items %}
+								<li><strong> {{ key }} : </strong> {{ value }} </li>
+							{% endfor %}
+						<br/>
+					{% empty %}
+						<li><strong>Currently, there are no lab orders...you can add them on the Clinician->Plans of Care Form </strong></li>
+					{% endfor %}
+				</ul>
+	</div>
+	</article> 	
+	<br class="clear" /> 
+</div> <!--tab container --> 
+<br class="clear" /> 
+<h1>Welcome to the Lab | Pharmacy Station</h1>
+</div> <!-- accordion section --> 
+<!--{% for key,value in plan.items %}
+				{% if key == 'Lab Order?' and value == 'yes' %}
+				<form action="" method="get">
+					{{ key }}: <br/>
+        				<input type="text" value= "{{ value }}"><br/>
+        				
+    				
+				{% endif %}
+			{% endfor %}-->

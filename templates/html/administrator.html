@@ -1,0 +1,85 @@
+<!DOCTYPE html> 
+ 
+<html lang="en"> 
+<head> 
+<meta charset="utf-8" /> 
+<!--[if lt IE 9]>
+<script src="/static/js/html5.js"></script>
+<![endif]--> 
+	<title>HR4E Forms</title>
+   	<link rel="shortcut icon" href="static/favicon.ico" > 
+   	<script type="text/javascript" src="/static/js/jquery.min.js"></script> 
+    	<script type="text/javascript" src="/static/js/hr4e.js"></script> 
+    	<link rel="stylesheet" type="text/css" href="/static/css/super.css" />
+</head>
+<script>
+
+$(document).ready(function() {
+	$(".tab_content").hide(); //Hide all content
+	var loadTab = "{{ tag }}";
+	$("ul.tabs li:nth-child({{ tag }})").addClass("active").fadeIn();
+	//$(loadTab).addClass("active").fadeIn();
+	//t=$('#tab_container').tabs();
+	//t.tabs('select',{{tag}});
+	//alert($("ul.tabs li:first"));
+	//alert(loadTab);
+	$(".tab_content:nth-child({{ tag }})").fadeIn();
+	$("ul.tabs li").click(function() {
+		$("ul.tabs li").removeClass("active"); 
+		$(this).addClass("active"); 
+		$(".tab_content").hide(); 
+		//var activeTab = $(this).find("a").attr("href"); 
+		var activeTab = $(this).find("a").attr("href");
+		$(activeTab).fadeIn();
+		return false;
+	});
+});
+</script>
+
+<body class="showgrid"> 
+<div id="options">
+<h3><a href="http://127.0.0.1:8000" title="home"><strong>Return to the HR4E Application</strong></a></h3>
+</div> 
+<header> 
+	<hgroup> 
+		<h1 id="big">HR4E</h1><br/>
+		<h2>Health Records For Everyone</h2> 
+		<h3>Hello {{ name }} and welcome.</h3> 
+	</hgroup> 
+</header> 
+<br/><br/><br/>
+<div class="accordion" id="accordion">
+<section class="clinic">	
+<!-- *****************************************************************************************
+					Clinic .html						
+-->
+
+
+{% include "clinic.html" %}
+</section> 
+
+
+</div> 
+<!-- class="accordion" id="accordion" --> 
+<br class="clear" /> 
+ 
+ 
+<!-- ******************************************************************************************
+					Footer		 
+     ****************************************************************************************** --> 
+<footer class="r15"> 
+<small><a href="http://www.hr4e.org" title="HR4E">HR4E </a></small> 
+</footer> 
+ 
+<!-- OK, notice {{ station }}.
+{{ station }} will load the appropriate accordion section [0,4] for each section above
+IE: {{ station }} = 0 means that the Intake Station will load.
+-->
+<script type="text/javascript"> 
+var parentAccordion=new TINY.accordion.slider("parentAccordion");
+parentAccordion.init("accordion","h1",0,0, "accordion-selected");
+</script> 
+ 
+</body> 
+</html>
+

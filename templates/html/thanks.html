@@ -1,0 +1,125 @@
+<!DOCTYPE html> 
+ 
+<html lang="en"> 
+<head> 
+<meta charset="utf-8" /> 
+<!--[if lt IE 9]>
+<script src="/static/js/html5.js"></script>
+<![endif]--> 
+	<title>HR4E Thank You for Saving {{ patient.family_name }}, {{ patient.given_name }}</title>
+   	<link rel="shortcut icon" href="static/favicon.ico" > 
+   	<script type="text/javascript" src="/static/js/jquery.min.js"></script> 
+    	<script type="text/javascript" src="/static/js/hr4e.js"></script> 
+    	<link rel="stylesheet" type="text/css" href="/static/css/super.css" />
+</head>
+<script>
+$(document).ready(function() {
+    $(".tab_content").hide(); //Hide all content
+    $("ul.tabs li:first").addClass("active").show(); 
+    $(".tab_content:first").show(); 
+    $("ul.tabs li").click(function() {
+        $("ul.tabs li").removeClass("active"); 
+        $(this).addClass("active"); 
+        $(".tab_content").hide(); 
+        var activeTab = $(this).find("a").attr("href"); 
+        $(activeTab).show();
+        return false;
+    });
+});
+</script>
+
+<body class="showgrid"> 
+<div id="options">
+<h3><a href="/hr4e/" title="home"><strong>> > > Return to the HR4E Application</strong></a></h3>
+</div> 
+<header> 
+	<hgroup> 
+		<h1>Thank you for saving <br/>{{ patient.family_name }}, {{ patient.given_name }}!!!</h1><br/>
+		<h2>Feel free to right-click and print!</h2> 
+	</hgroup> 
+</header> 
+<br/><br/><br/>
+<div class="accordion" id="accordion">
+<section class="clinic">
+<div>	
+	<strong><h2>Basic Info</h2></strong><br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;<strong>Patient ID: </strong> {{ patient.id }} <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;<strong>Patient Name: </strong> {{ patient.family_name }}, {{ patient.given_name }} <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;<strong>Chief Complaint: </strong> {{ patient.chief_complaint }} <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;<strong>Patient Height:</strong> {{ patient.height }}, <strong>Patient Weight:</strong> {{ patient.weight }} <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;<strong>Patient BMI: </strong> {{ patient.bmi }}, <strong>Patient Z-Score</strong> {{ patient.z_score }} <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;<strong>Patient Gender:</strong> {{ patient.gender }} </strong><br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;<strong>Languages: </strong> {% for language in patient.languages %}{{ language }}, {% endfor %} <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;<strong>Patient Stated Age: </strong> {{ patient.stated_age }} <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;<strong>Patient Estimated Age:</strong>  {{ patient.estimated_age }} <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;<strong>Patient Status in School: </strong> {{ patient.school_status }} <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;<strong>Year in School:</strong>{{ patient.school_year }}  <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;<strong>Patient Tribe:</strong>{{ patient.tribe }}<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;<strong>Present Village:</strong> {{ patient.present_village }}<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;<strong>Home Village:</strong> {{ patient.home_village }} <br/>
+	<br/>	
+	<strong>Support: </strong> <br/>
+		
+					&nbsp;&nbsp;&nbsp;&nbsp;<strong>School:</strong> {{patient.school}}<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;<strong>Name: </strong>{{patient.teacher}}
+</div>
+<div>
+				<br/><br/>
+	<strong><h2>Immunizations:</h2> </strong> <br/>
+		{% for immunization in patient.vaccinations %} 
+			{% for name,text in immunization.items %}
+					&nbsp;&nbsp;&nbsp;&nbsp;{{ name }} : {{ text }}
+				{% endfor %}<br/>
+		{% endfor %}<br/>
+</div>
+<div>
+	<strong><h2>Vitals:</h2> </strong> <br/>
+		{% for vital in patient.vitals %} 
+			{% for name,text in vital.items %}
+					&nbsp;&nbsp;&nbsp;&nbsp;{{ name }} : {{ text }}
+				{% endfor %}<br/>
+		{% endfor %}<br/>
+</div>
+<div>
+	<strong><h2>Assessments: </h2></strong> <br/>
+		{% for assessment in patient.assessments %} 
+			{% for name,text in assessment.items %}
+					&nbsp;&nbsp;&nbsp;&nbsp;{{ name }} : {{ text }}
+				{% endfor %}<br/>
+		{% endfor %}<br/>
+</div>
+<div>
+	<strong><h2>Plans of Care:</h2></strong> <br/>
+		{% for plan_of_care in patient.plans_of_care %} 
+			{% for name,text in plan_of_care.items %}
+					&nbsp;&nbsp;&nbsp;&nbsp;{{ name }} : {{ text }}
+				{% endfor %}<br/>
+		{% endfor %}<br/>
+</div>
+</section> 
+
+
+</div> 
+<!-- class="accordion" id="accordion" --> 
+<br class="clear" /> 
+ 
+ 
+<!-- ******************************************************************************************
+					Footer		 
+     ****************************************************************************************** --> 
+<footer class="r15"> 
+<small><a href="http://www.hr4e.org" title="HR4E">HR4E </a></small> 
+</footer> 
+ 
+<!-- OK, notice {{ station }}.
+{{ station }} will load the appropriate accordion section [0,4] for each section above
+IE: {{ station }} = 0 means that the Intake Station will load.
+-->
+<script type="text/javascript"> 
+var parentAccordion=new TINY.accordion.slider("parentAccordion");
+parentAccordion.init("accordion","h1",0,-1, "accordion-selected");
+</script> 
+ 
+</body> 
+</html>
+

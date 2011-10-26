@@ -1,0 +1,148 @@
+<h1 title="intake"><span id = "intake"><a id="intake" name="intake"><strong>Intake Station</strong></a></span></h1>
+<div class="accordion-section" id="intake" style="height:0px"> <!--to hide style="height:0px" onload--> 
+	<nav>
+		<ul class="tabs"> 
+			<li class ="intake"><a href="#intake_demographics" title="Demographics">Demographics</a></li> 
+			<li class ="intake"><a href="#intake_nutrition" title="Nutrition">Nutrition</a></li> 
+			<li class ="intake"><a href="#intake_photo" title="Photograph">Photograph</a></li> 
+			<!-- Review data might just be a link to the exit station -->
+			<li class ="intake"><a href="#intake_review" title="Review">Review Data</a></li> 
+	    	</ul> 
+    	</nav> 
+	<div class ="tab_container">
+		<article class ="tab_content" id = "intake_demographics">
+		<div class = "r4 left">
+		<h3>Edit Demographics: </h4>
+		<!--<form action="" method="POST">-->
+			<form action="" method ="POST">
+				<ul>
+				{% for field in intakeDemographics %}
+	       				<li>
+		    				{% if field.errors %}<font color="red"> {{ field.errors }} </font>{% endif %}
+		    				<strong>{{ field.label_tag }}:</strong><br/> {{ field }}
+					</li>
+	    			{% endfor %}
+				<ul>
+				<br/>
+				<div>
+				<input type="submit" name="update_demographics" value="Update Demographics" />	
+				
+				</div>
+			</form>
+		</div>
+		<div class ="r4">
+			
+		</div>
+		
+		<div class ="r6">
+			<h3>Demographics:</h3>
+			<ul>
+				<li>Family Name: {{ patient.family_name }}</li>
+				<li>Given Name: {{ patient.given_name }}</li>
+				<li>Gender: {{ patient.gender }}</li>
+				<li>Estimated Age: {{ patient.estimated_age }}</li>
+				<li>Stated Age: {{ patient.stated_age }}</li>
+				<li>Languages: {% for language in patient.languages %}{{ language }}, {% endfor %}</li>
+				<li>Tribe: {{ patient.tribe }}</li>
+				<li>Home Village: {{ patient.home_village }}</li>
+				<li>Present Village: {{ patient.present_village }}</li>
+				<li>School: {{ patient.school }}</li>
+				<li>Enrollment Status: {{ patient.school_status }} </li>
+				<li>Grade in School: {{ patient.school_year }}</li>
+				<li>Teacher: {{ patient.teacher }}</li>	
+			</ul>
+			
+		</div>
+		</article><!--end .r8 left intake_information --> 
+		<article class ="tab_content" id = "intake_nutrition">
+		<div class = "r4 left">
+			<h3>Edit Nutritional Status: </h4>
+			<form action="" method ="POST">
+				<ul>
+				{% for field in intakeNutrition %}
+	       				<li>
+						
+		    				{% if field.errors %}<font color="red"> {{ field.errors }} </font>{% endif %}
+		    				<strong>{{ field.label_tag }}:</strong><br/> {{ field }}
+					</li>
+	    			{% endfor %}
+				<ul>
+				<!--
+				<ul>
+					{{ form.as_ul }}
+				</ul>
+				-->
+				<br/>
+			<input type="submit" name="update_nutrition" value="Update Nutrition" />
+				
+			</form>
+		</div>
+		<!--</form> End of encapsulation form form -->
+		<div class ="r4">
+			
+		</div>
+		<div class = "r6">
+		
+			<h3>Nutritional Status Review:</h3>
+			<ul>
+				<li>Height (cm): {{ patient.height }}</li>
+				<li>Weight (kg): {{ patient.weight }}</li>
+				<li>BMI: {{ patient.bmi }}</li>
+				<li>Z-score: {{ patient.z_score }}</li>
+			</ul>
+				
+		</div>
+		</article>
+		<article class ="tab_content" id = "intake_photo">
+		<div class = "r8 left">
+			<h3>Photo Information or upload form goes here...</h3>
+		
+		</div>
+		</article>
+		<article class ="tab_content" id = "intake_review">
+		<div class = "r4 left">
+			<h3>Demographics:</h3>
+			<ul>
+				<li>Family Name: {{ patient.family_name }}</li>
+				<li>Given Name: {{ patient.given_name }}</li>
+				<li>Gender: {{ patient.gender }}</li>
+				<li>Estimated Age: {{ patient.estimated_age }}</li>
+				<li>Stated Age: {{ patient.stated_age }}</li>
+				<li>Languages: {% for language in patient.languages %}{{ language }}, {% endfor %}</li>
+				<li>Tribe: {{ patient.tribe }}</li>
+				<li>Home Village: {{ patient.home_village }}</li>
+				<li>Present Village: {{ patient.present_village }}</li>
+				<li>School: {{ patient.school }}</li>
+				<li>Enrollment Status: {{ patient.school_status }} </li>
+				<li>Grade in School: {{ patient.school_year }}</li>
+				<li>Teacher: {{ patient.teacher }}</li>	
+			</ul>
+			<br/>
+			<br/>
+			<h3>Nutritional Status:</h3>
+			<ul>
+				<li>Height (cm): {{ patient.height }}</li>
+				<li>Weight (kg): {{ patient.weight }}</li>
+				<li>BMI: {{ patient.bmi }}</li>
+				<li>Z-score: {{ patient.z_score }}</li>
+			</ul>
+		
+		</div>
+		<div class ="r4">
+			
+		</div>
+		<div class = "r6">
+		
+			<h3>Photo:</h3>
+			<p>Photo goes here...</p>
+				
+		</div>
+		</article>
+		
+ 	</div> <!-- end tab container div-->
+<br class="clear" /> 
+<h1>Welcome to the {{ station_name }} Station</h1>
+</div> <!-- accordion section --> 
+
+
+

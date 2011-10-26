@@ -1,0 +1,5 @@
+sem-ET Guraginya
+orm-ET Oromo
+amh-ET Amharic
+eng-ET English-ET
+eng-US English

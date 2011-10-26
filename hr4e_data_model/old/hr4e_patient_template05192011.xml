@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--HR4E patient data template, based on greenCCD.xml from Alschuler Associates -->
+<!-- We will validate ourselves against the greenCCD.xsd produced by Alschuler 
+	Associates. We can keep a local copy of the schema. The original was downloaded 
+	from the GreenCDA project page on HL7: http://wiki.hl7.org/index.php?title=GreenCDA_Project. 
+	From that page, download and unzip CDAR2_IG_GREENMOD4CCD_R1_I1_2010SEP.zip 
+	We use 3 namespaces: default is AlschulerAssociates xsi prefix is for XML 
+	schema tags hr4e prefix for hr4e extensions to the default model. hr4e is 
+	a placeholder, can change it if needed. -->
+<greenCCD xmlns="AlschulerAssociates::GreenCDA" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:hr4e="hr4e::patientdata" 
+		  xsi:schemaLocation="AlschulerAssociates::GreenCDA green_ccd.xsd">
+	
+	<!-- Header information. This information applies to the entire document. -->
+	<header>
+
+        <!-- documentID is required and must be unique for every HR4E CCD document 
+			instance. This document ID is a UUID. Does XForms have native utility to 
+			generate UUIDs? New UUIDs can be generated from this website: http://www.itu.int/ITU-T/asn1/uuid.html, 
+			or up to 2000 can be generated from here: http://www.guidgenerator.com/. -->
+		<documentID root="00000000-0000-0000-0000-000000000000" />
+
+		<!-- Title is required, but a fixed value for all HR4E instances. HR4E 
+			CCD is a placeholder name -->
+		<title>Health Records for Everyone Continuity of Care Document</title>
+
+		<!-- Version is optional, but let's use it to help track versions of this 
+			template. It's value is fixed for all document instances in a given release. -->
+		<version>
+			<number>1</number>
+		</version>
+
+		<!-- Confidentiality code is required. It refers to the level of confidentiality 
+			associated with this document. codeSystem is fixed for all documents. code 
+			is a set of values defined. We can assume it has a fixed value of "N". The 
+			set of valid codes for this codeSystem is given here: http://ushik.ahrq.gov/dr.ui.drValueDomain_View?system=mdr&ValueDomainID=86825000&OrganizationID=32&Referer=ValueDomain 
+			greenCCD limits the values to N, R, V, so that is all we need
+			-->
+		<confidentiality codeSystem="2.16.840.1.113883.5.25"
+			code="N" />
+
+		<!-- documentTimestamp is required. It should be set to the date and time 
+			the document was created. The format is year/month/day/hour/min/sec, with 
+			time zone declared as explicit offset from zero meridian -->
+		<documentTimestamp value="20110517130000+0800" />
+
+
+		<!-- patient demographic information is required. It should be set to the 
+			identifying information for the patient whose clinical care is described 
+			in this document. The set of fields listed below are all required. If a required 
+			field does not have a value, it can be set to null using the attribute nullFlavor. 
+			valid values for nullFlavor are given here: http://www.hl7.org/v3ballot/html/infrastructure/vocabulary/NullFlavor.html. 
+			We can choose a value of "NI", meaning no information. -->
+		<personalInformation>
+			<patientInformation>
+				<!-- personID is required and must be unique for each patient instance. 
+					This root contains the prefixe for HR4E; it will need to be appended
+					with a unique identifier for each patient. -->
+				<personID root="2.16.840.1.113883.3.881.XXX" />
+				<personAddress>
+					<streetAddressLine nullFlavor="NI" />
+
+					<!-- Let's use city to record present village -->
+					<city> Present Village </city>
+					<state nullFlavor="NI" />
+					<postalCode nullFlavor="NI" />
+				</personAddress>
+				<personPhone nullFlavor="NI" />
+				<personInformation>
+					<personName>
+						<given>Frodo</given>
+						<family>Baggins</family>
+					</personName>
+
+					<!-- the code system is fixed for all HR4E patients. set the code to 
+						"M" or "F" 
+					-->
+					<gender codeSystem="2.16.840.1.113883.5.1" code="M" />
+
+					<!-- personDateofBirth is required. Use "NI" if it is not available. -->
+					<personDateOfBirth value="20110517130000+0800" />
+
+					<!-- HR4E section to record additional age information. -->			
+					<hr4e:ageInformation> 
+						<hr4e:statedAge>100</hr4e:statedAge> 
+						<hr4e:estimatedAge>100</hr4e:estimatedAge> 
+						<hr4e:yearInSchool>1</hr4e:yearInSchool> 
+						<hr4e:statusInSchool>A+</hr4e:statusInSchool> 
+					</hr4e:ageInformation> 
+				</personInformation>
+
+				<!-- HR4E section to record living situation. Do we want to make this 
+					optional? Required, but allow "NI" as an option? Provide list of possible 
+					values? 
+				-->
+				<hr4e:livingSituation> 
+					<hr4e:homeVillage>Bagend</hr4e:homeVillage> 
+					<hr4e:tribe>Hobbit</hr4e:tribe> 
+				</hr4e:livingSituation>
+			</patientInformation>
+		</personalInformation>
+
+		<!-- languagesSpoken is optional. If this section is present, it can contain 
+			1 or more languages, and should represent the languages spoken by the patient 
+			for whom this document is created. A language is identified by a code. Codes 
+			are made up of a 3 character language code, followed by a 2 character country 
+			code. Language codes are given here: 
+			Language codes are given here:
+			http://en.wikipedia.org/wiki/List_of_ISO_639-2_codes
+			Country codes are given here: 
+			http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#ET
+			
+			The set of codes relevant for the next clinic visit in Ethopia is:
+			sem-ET Guraginya
+			orm-ET Oromo 
+			amh-ET Amharic 
+			eng-ET English (as spoken in Ethiopia
+			eng-US English (as spoken in the US)
+			
+			Note that there is a standard for a 2 character language code (e.g. en-US), but
+			we have chosen the 3 character code.
+			There is also a 3 character country code, but the 2 character code is more widely used.
+			
+		 -->
+		<languagesSpoken>
+			<languageSpoken>
+				<languageCode code="sem-ET" />
+			</languageSpoken>
+		</languagesSpoken>
+
+		<!-- supports is optional If this section is present, it can contain 1 
+			or more person who supports the patient. The types of supporters are guardian 
+			or contact. We can use this section to record the school and teacher information 
+			as a contact. This should be the set once for a school visit. Use "NI" for 
+			any field not available -->
+		<supports>
+			<support>
+				<date nullFlavor="NI" />
+				<contact>
+					<contactAddress>
+						<streetAddressLine nullFlavor="NI" />
+						<city>Bagend</city>
+						<state nullFlavor="NI" />
+						<postalCode nullFlavor="NI" />
+					</contactAddress>
+					<contactTelecom nullFlavor="NI" />
+					<!-- Given the teacher name as the contact name. -->
+					<contactName>
+						<given>Teacher</given>
+						<family>Name</family>
+					</contactName>
+
+					<!-- HR4E section to record school name. -->
+					<hr4e:schoolName>School Name</hr4e:schoolName>
+				</contact>
+			</support>
+		</supports>
+
+		<!-- Custodian is required, and represents the organization or entity responsible 
+			for the document. The sponsoring organization (Project Mercy) will assume the role
+			of the custodian of the document. 
+			
+			Only custodianID is required, and it must be a unique OID 
+			that will be the same for all patients at a clinic visit. Thus, someone must
+			configure this field with an appropriate OID for the sponsoring organization. The default is Project Mercy. -->
+		<custodian>
+			<custodianID root="0.00.000.00000.00.0" />
+			<custodianName>Project Mercy</custodianName>
+		</custodian>
+
+		<!-- Health care providers is optional, but if it exists, it represents 
+			the list of health care providers involved in the care of the patient that 
+			is described in this document. It should be set to the set of providers working 
+			at a clinic and should be the same for all patients (I think?). -->
+		<healthcareProviders>
+
+			<!-- This should be set to the start and end date of the clinic. -->
+			<careProvisionDateRange>
+				<low value="20110328" />
+				<high value="20110603" />
+			</careProvisionDateRange>
+
+			<!-- List of health care providers. -->
+			<healthcareProvider>
+				<!-- The codesystem is fixed, and we will use some standard as well as supply our own names and codes.  For codesystem, we will
+                             use the HR4E OID with an appropriate suffix.  Here is the set of names and codes:
+					originalText			code
+					Primary Care Physician		PCP
+					Intake Specialist			AUTM
+					Triage Nurse			TINU
+					Workstation Specialist		AUWA
+					Pharmacy Specialist		PHSP
+					Scribe				AUSC
+				 -->
+				<role code="PCP" codeSystem="2.16.840.1.113883.3.881.XXX">
+					<originalText>Primary Care Physician</originalText>
+				</role>
+
+				<!-- This date range could be specific for health care provider, if they 
+					did not stay for whole clinic. By default, make it the same as the date range 
+					for the clinic. -->
+				<dateRange>
+					<low value="20111024" />
+					<high value="20111104" />
+				</dateRange>
+
+				<!-- providerEntity is required, it is the organization associated with 
+					the health care provider (HR4E?). This should be the same for all document 
+					instances for a clinic visit. -->
+				<providerEntity>
+					<!-- providerID is required, and should be a unique identifier for the 
+						organization. It is a UUID in greec_ccd, but I think we should base
+						it off of the HR4E oid. -->
+					<providerID root="2.16.840.1.113883.3.881.XXX" />
+					<providerName>
+						<prefix>Dr.</prefix>
+						<given>Bilbo</given>
+						<family>Baggins</family>
+					</providerName>
+					<providerOrganizationName>Friends of Project Mercy</providerOrganizationName>
+				</providerEntity>
+			</healthcareProvider>
+		</healthcareProviders>
+
+		<!-- information source is required, I think. It represents the author 
+			of the document. This will be the person whose role is scribe for the clinic -->
+		<informationSource>
+			<author>
+				<authorTime value="20110517130000+0800" />
+				<authorName>
+					<prefix>Dr.</prefix>
+					<given>Sam</given>
+					<family>Gamgee</family>
+				</authorName>
+			</author>
+		</informationSource>
+		
+	 	<!-- We also want to capture information about the clinic site. This should be configured
+	 		 for every mobile clinic trip. 
+ 		-->
+		<hr4e:clinics>
+		   	<hr4e:clinicEntity>
+		   		<hr4e:clinicGPSCoordinates>GPS coordinates</hr4e:clinicGPSCoordinates>
+				<hr4e:clinicName>2011 Medhane Alem School</hr4e:clinicName>
+				<hr4e:clinicDetails>2011 Medhane Alem School Health Assessment Data</hr4e:clinicDetails>
+		    </hr4e:clinicEntity>
+		</hr4e:clinics>
+		
+	</header>
+	
+	<!-- Body information.  The sections below must be in this order to validate against greenCCD.xsd s-->
+	<body>
+	
+		<!-- Results are a list of the patient's lab results.  It is optional for any patient.
+	    -->
+		<results>
+			<result>
+				<resultID root="00000000-0000-0000-0000-000000000000"/>
+				<resultDateTime value="20110517130000+0800"/>
+				
+				<!-- codeSystem is fixed and from LOINC.  I think this is the list of valid codes:
+					http://pubdiz.tmu.edu.tw/directory/loincDirectory/directory/Directory_H.html
+					It is very long, we will need to decide on subset of values that are valid for HR4E.
+				 -->
+				<resultType codeSystem="2.16.840.1.113883.6.1" code="00000-0" displayName="XXX"/>
+				
+				<!-- Result Status is required.  We need to find the right context to find valid values for it. -->
+				<resultStatus code="completed"/>
+				
+				<!-- resultValue is optional. physicalQuantity allows for results to be expressed in different units. -->
+				<resultValue>
+					<physicalQuantity value="13.2" unit="g/dl"/>
+				</resultValue>
+				
+				<!--resultInterpretation is optional describes how to interpret the result.  codeSystem is a fixed value. For codes, 
+					see list of values here; http://www.google.com/search?hl=&q=2.16.840.1.113883.5.83&sourceid=navclient-ff&rlz=1B3GGLL_enUS392US392&ie=UTF-8 
+					Phil needs to verify, but I believe the valid codes are:
+					Display name			Code Name		Code
+					Normal				Normal		N
+					Abnormal				Abnormal		A
+					Abnormal Low			Low			L
+					Abnormal Critical Low 		Low alert		LL
+					Abnormal High			High			H
+					Abnormal-Critical-High		High alert		HK
+					Above High Threshold		High Threshold	HX
+					Below Low Threshold		Low Threshold	LX
+					High Off Scale			High Off Scale	>
+					Low Off Scale			Low Off Scale	<
+					-->
+				<resultInterpretation codeSystem="2.16.840.1.113883.5.83" code="N"/>
+				
+				<!-- Result range will need be be configured on a per clinic basis for each lab. -->
+				<resultReferenceRange>M 13-18 g/dl; F 12-16 g/dl</resultReferenceRange>
+			</result>
+		</results>
+		
+	    <!-- Encounters are a list of the patient's interactions with health care providers.  It is optional, but
+	         we will generate at least one encounter for the patient's visit to the mobile clinic. 
+	    -->
+		<encounters>
+			<encounter>
+				<!-- We will need to generate a unique id for every encounter of every patient.  It is a UUID. -->
+				<encounterID root="00000000-0000-0000-0000-000000000000" />
+				
+				<!-- encounterType is optional.  The code system is fixed.  The list of codes can be found here:
+					http://wiki.hl7.no/index.php/Encounter_Type.  "FLD" is used for an encounter that outside a 
+					takes place outside a dedicated service delivery location, which seems relevant here.  -->
+				<encounterType codeSystem="2.16.840.1.113883.5.4" code="FLD">
+					<originalText>General Checkup</originalText>
+				</encounterType>
+				<encounterDateTime value="20110517"/>
+		   		<hr4e:encounterNotes>
+				  Enter any additional notes and observations here.
+		   		</hr4e:encounterNotes>
+			</encounter>
+		</encounters>
+		
+		<!-- Medications are a list of the patient's medications.  It is optional for a given patient.
+	    -->
+		<medications>
+			<medication>
+				<medicationInformation>
+					<!-- All medications are coded.  The codesystem and codeSystemName is fixed and is for RXNorm. Codes should be configurable.  The current list
+                                   of valid codes is as follows:
+                                Display Name						Code		Original Text
+                                Azithromycin 40 MG/ML Oral Suspension         141963	azithromycin
+                                Fluconazole 100 MG Oral Tablet                197698	fluconazole
+                                Ivermectin 3 MG Oral Tablet                   311207	ivermectin
+                                Mebendazole 100 MG Chewable Tablet            105347	mebendazole
+                                -->
+					<codedProductName codeSystem="2.16.840.1.113883.6.88" codeSystemName="RxNorm"  displayName="Albuterol 0.09 MG/ACTUAT inhalant solution" code="307782"/>
+					<freeTextProductName>Albuterol inhalant</freeTextProductName>
+				</medicationInformation>
+			</medication>
+		</medications>
+		
+		<!-- Immunizations are a list of the patient's immunizations.  It is optional, but some HR4E patients will
+			get immunizations. Many fields are listed, but the only field that seems to be required is 
+			medicationInformation.
+	    -->
+		<immunizations>
+			<immunization>
+				<administeredDate value="201104"/>
+				<medicationInformation>
+					<!-- The code system is for CDC vaccine codes. I believe valid codes can be found here:
+					http://www2a.cdc.gov/nip/IIS/IISStandards/vaccines.asp?rpt=cpt
+					The column that corresponds to code below is the CVX column.
+					 -->
+					<codedProductName codeSystem="2.16.840.1.113883.6.59" displayName="XXX" code="00"/>
+					<freeTextProductName>Influenza virus vaccine</freeTextProductName>
+				</medicationInformation>
+			</immunization>
+		</immunizations>
+		
+		<!-- Vital signs are a list of the patient's vital signs.  It is optional, but
+	         we will generate at least one encounter for the patient's visit to the mobile clinic. -->
+		<vitalSigns>
+			<vitalSign>
+			
+				<!-- A new UUID must be generated for each vital sign instance. -->
+				<resultID root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+				<resultDateTime value="19991114"/>
+				<resultType codeSystem="2.16.840.1.113883.6.96" displayName="Body height" code="50373000"/>
+				<resultStatus code="completed"/>
+				<resultValue>
+					<physicalQuantity value="177" unit="cm"/>
+				</resultValue>
+			</vitalSign>
+		</vitalSigns>
+		
+		<!-- Conditions are conditions the patient suffers from.  It is optional, but is the same as
+		 	the 'Assessment' section on the HR4E design spec.  problemName appears to be the only required field.  
+		 	There is a field for priorityDiagnosis; is this the same as diagnosis on HR4E design spec? 
+		 	Do we also need to add extensions for redFlag? 
+		 	
+		 	Note: we have also decided to use this section for the 'Chief Complaint' section on
+		 	the HR4E design spec.  All that is needed is to record the date free text of the complaint 
+		 	in the problemName.  Use NI for problem code in this case.
+		 	-->
+		<conditions>
+			<condition>
+				<problemDate>
+					<low value="1950"/>
+				</problemDate>
+				<problemName>Asthma</problemName>
+				<!-- This is a SNOMED codeSystem. I do not know how to find valid values. -->
+				<problemCode code="195967001"  codeSystem="2.16.840.1.113883.6.96" displayName="Asthma"/>
+			</condition>
+		</conditions>
+
+		<!-- planOfCare are planned actions for the patient.  It is optional, and the same as Treatment/Recommendations on 
+			HR4E design spec. pplanOfCare can be observation, procedure or act. All are the same structure, shown below. 
+			Phil will need to provide more details on subset of values. -->
+		<planOfCare>
+			<plannedObservation>
+				<!--  We will need to generate a unique ID for each plan of care item.  This is a UUID -->
+				<planId root="00000000-0000-0000-0000-000000000000" />
+				<!-- This is a SNOMED codeSystem. -->
+				<planType code="23426006" codeSystem="2.16.840.1.113883.6.96" displayName="Pulmonary function test"/>
+				<planFreeText>Add more text here</planFreeText>
+			</plannedObservation>
+		</planOfCare>
+	</body>
+</greenCCD>

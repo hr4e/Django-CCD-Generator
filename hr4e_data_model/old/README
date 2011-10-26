@@ -1,0 +1,47 @@
+This directory contains the hr4e_data_model
+
+1. Use XForms code to generate an hr4e patient data file based on hr4e_patient_template.xml 
+2. Invoke hr4e_patient_to_ccd.py on the file generated in step 1. 
+
+Two files will be generated for the patient data:
+	+	a green CCD compliant .xml file
+	+ 	a CDA-compliant .xml file
+
+Files:
+hr4e_patient_template.xml: A template for an hr4e patient data instance. It is based on the green_ccd.xsd XML schema
+with extensions to capture additional hr4e information that is not defined in the green_ccd.xsd spec.  These elements
+are from the hr4e namespace, and so have a prefix of hr4e:.
+
+A patient instance document generated from this template is not CCD-compliant and will not validate against green_ccd.xsd
+without first removing the hr4e elements.
+
+hr4e_patient_to_ccd.py: A python script that invokes hr4e_patient_to_ccd.xslt to remove hr4e namespace elements from a
+an hr4e patient data file that follows the hr4e_patient_template.xml template. The output of this python script
+will generate an xml file that can be validated against the green_ccd.xsd file.
+
+hr4e_patient_to_ccd.py [-i <HR4E patient input file>] 
+					   [-g <green CCD patient output file>] 
+					   [-c <CDA  patient output file>] 
+					   [-hxslt <HR4E xslt file>]
+					   [-gxslt <HR4E xslt file>]
+
+<input file> is a patient data instance file. It defaults to hr4e_patient_template.xml in the current directory
+<green CCD patient output file> is the name of the green CCD file to be generated.  It defaults to green_patient_template.xml in the current directory.
+<CDA patient output file> is the name of the CDA patient data file to be generated.  It defaults to cda_patient_template.xml in the current directory.
+<HR4E xslt file> is the name of the xslt file that removes hr4e tags.  It defaults to hr4e_patient_to_ccd.xslt in the
+current directory. 
+<green xslt file> is the name of the xslt file that transforms a green CCD document to a CDA document.  It defaults to green_ccd.xslt in the
+current directory. 
+
+This python script uses a file called the saxon XSLT processor, and assumes that it is in a subdirectory called saxon. 
+
+hr4e_patient_to_ccd.xslt: An XSLT stylesheet to remove elements defined with the hr4e namespace from an hr4e patient data xml file.
+
+green_ccd.xsd: An XML schema file for green CCD xml documents. 
+
+green_cda_narrative.xsd: An XML schem file for green CDA narrative. It is included by green_ccd.xsd and so must be accessible. We assume it is
+in the current directory.
+
+green_xslt: An XSLT stylesheet to generate a CDA-compliant model from a file that conforms to the green_ccd.xsd XML schema.
+
+README: this file

@@ -1,0 +1,593 @@
+/******************************************************************************
+	Reset
+*******************************************************************************/
+html, body, div, span, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, code,del, dfn, em, img, img a, q, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, dialog, figure, footer, header, hgroup, nav, section{
+margin: 0; padding: 0; border: 0; font-weight: inherit; font-style: inherit; font-size: 100%; font-family: inherit; vertical-align: baseline; text-decoration: none;}
+article, aside, dialog, figure, footer, header,hgroup, nav, section {display:block;}
+body {line-height: 1; color: black; background: white;}
+ol, ul {list-style: none;}
+/* tables still need 'cellspacing="0"' in the markup */
+table {border-collapse: separate; border-spacing: 0;}
+caption, th, td {text-align: left;font-weight: normal;}
+blockquote:before, blockquote:after, q:before, q:after {content: "";}
+blockquote, q {quotes: "" "";}
+*:focus{outline:none;}
+
+
+
+
+
+
+/******************************************************************************
+	Presentation
+*******************************************************************************/
+p{max-width: 600px}
+.r1,.r2,.r3,.r4,.r5,.r6,.r7,.r8,.r9,.r10,.r11,.r12,.r13,.r14{margin: 24px 12px; float: left;}
+.r1  {width: 48px;}
+.r2  {width: 120px;}
+.r3  {width: 192px;}
+.r4  {width: 264px;}
+.r5  {width: 336px;}
+.r6  {width: 408px;}
+.r7  {width: 480px;}
+.r8  {width: 552px;}
+.r9  {width: 624px;}
+.r10 {width: 696px;}
+.r11 {width: 768px;}
+.r12 {width: 840px;}
+.r13 {width: 912px;}
+.r14 {width: 984px;}
+.left{margin-left: 24px;}
+
+/******************************************************************************
+	Typography
+*******************************************************************************/
+
+html 
+{ 
+    font-size:100.01%; 
+}
+body 
+{
+	font-size: 14.5px;
+	color: #444;
+	background: #fff;
+	line-height: 24px;
+	/*font-family: "Palatino Linotype", Palatino, Palladio, "URW Palladio L", "Book Antiqua", Baskerville, "Bookman Old Style", "Bitstream Charter", "Nimbus Roman No9 L", Garamond, "Apple Garamond", "ITC Garamond Narrow", "New Century Schoolbook", "Century Schoolbook", "Century Schoolbook L", Georgia, serif;*/
+	font-family:arial, helvetica;
+}
+
+/******************************************************************************
+	Headers
+*******************************************************************************/
+
+h1,h2,h3,h4,h5,h6 
+{
+	font-weight: normal; 
+	color: #000; 
+	font-family:arial, helvetica;
+	margin-bottom: 24px;
+	line-height: 24px;
+}
+
+h1 	{font-size: 24px; text-transform: uppercase; letter-spacing: .05em; }
+
+h2, section h1 {font-size: 20px; text-transform: uppercase; letter-spacing: .1em;}
+
+h3, section aside h1 {font-size: 16px; text-transform: uppercase;  }
+
+h4, section aside h2, section section h1, hgroup>h2  {font-size: 14px; text-transform: uppercase; letter-spacing: .1em;}
+
+h5, section article h2, section section article h1,	section section aside h1 {font-size: 13px; text-transform: uppercase; letter-spacing: .1em;}
+
+h6 	{font-size: 12px; text-transform: uppercase; letter-spacing: .1em;}
+
+section hgroup>h2{font-size: 16px; }
+
+section hgroup h2+h3, section hgroup h1+h2
+{
+font-family: Futura, "Century Gothic", AppleGothic, sans-serif; 	text-transform:lowercase;
+	margin-top: -24px;
+	letter-spacing: 0;
+
+}
+
+hgroup{min-height: 72px;}
+h1 img, h2 img, h3 img,h4 img, h5 img, h6 img {margin: 0;}
+
+/******************************************************************************
+	Yummy Text Fun
+*******************************************************************************/
+p           { margin: 0 0 24px;}
+p img.left  { float: left; margin: 24px 24px 24px 0; padding: 0; }
+p img.right { float: right; margin: 24px 0 24px 24px; }
+
+a, a:visited
+{ 
+	color: #444;
+	text-decoration: none; 
+	/*border-bottom: dotted 1px #84B296;*/
+}
+a:focus,
+a:hover     { border-bottom: solid 2px #84B296; outline: none;}
+h1 a,h2 a,h3 a,h4 a,h5 a,h6 a, h1 a:visited,h2 a:visited,h3 a:visited,h4 a:visited,h5 a:visited,h6 a:visited{color: #000;}
+/******************************************************************************
+	Basic Lists
+*******************************************************************************/
+li ul,
+li ol       { margin: 0; }
+ul, ol      { margin: 0 24px 24px 0;}
+ul          { list-style-type: none; }
+ol          { list-style-type: decimal; }
+
+/******************************************************************************
+	Fonts
+*******************************************************************************/
+small		{font-style: italic; font-family: Baskerville, Garamond; text-transform:lowercase; font-size: 1em;}
+br.clear 	{ clear:both; display:block; height:1px; margin:-1px 0 0 0 }
+
+
+
+/******************************************************************************
+	Main
+*******************************************************************************/
+body{
+	overflow:scroll; 
+	position: relative; 
+	min-width:1150px; 
+	margin: 0 auto;
+	padding-top:0px;
+
+} 
+
+#accordion {width: 1056px; list-style:none; color:#033; margin: 18px auto 24px auto;}
+#accordion .accordion-section {
+	overflow:hidden; 
+	z-index: 1000;
+	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,.3);
+	-moz-box-shadow: 0 1px 3px rgba(0,0,0,.3);
+	box-shadow: 0 1px 3px rgba(0,0,0,.3);
+	width: 1032px;
+	margin: 0 12px;
+	position: relative;
+	}
+#accordion section > h1 {
+	cursor: pointer; color: #666; text-align: center; height: 96px; margin: 0 12px; z-index: 5;
+	text-shadow: rgba(255,255,255,0.2) 1px 0, rgba(255,255,255,0.1) 0 1px,
+    rgba(0,0,0,0.1) -1px -1px, rgba(255,255,255,0.2) 1px 1px;
+	}
+
+#accordion .clinic > h1{background-position: 0 0;}
+#accordion .intake >	h1{background-position: 0 0;}
+#accordion .clinician >	h1{background-position: 0 -96px;}
+#accordion .lectures >	h1{background-position: 0 -192px;}
+#accordion .triage >	h1{background-position: 0 -288px;}
+
+#accordion .clinic > h1:active, #accordion .intake   h1:hover{background-position: 0 -384px; color: #000;}
+#accordion .intake > h1:active, #accordion .intake   h1:hover{background-position: 0 -384px; color: #000;}
+#accordion .clinician >  h1:active, #accordion .clinician    h1:hover{background-position: 0 -480px; color: #000;}
+#accordion .lectures> h1:active, #accordion .photo   h1:hover{background-position: 0 -576px; color: #000;}
+#accordion .triage>h1:active, #accordion .triage h1:hover{background-position: 0 -672px; color: #000;}
+
+#accordion > section > h1:active, 
+#accordion > section > .accordion-selected{   
+	color: #84B296;
+	text-shadow: -1px -1px 1px rgba(0,0,0,.3);
+	text-shadow: rgba(0,0,0,0.1) -1px 0, rgba(0,0,0,0.3) 0 -1px, rgba(255,255,255,0.1) 1px 0, rgba(255,255,255,0.1) 0 1px, rgba(0,0,0,0.1) -1px -1px, rgba(255,255,255,0.1) 1px 1px;
+	}
+#accordion > section > h1 > span{padding-top: 48px; display: block;}
+
+/******************************************************************************
+	Header and Options
+*******************************************************************************/
+#options{position: fixed; right: 0; top: 50%; text-align: right;  margin-right: 6px; color: #ccc;}
+#options a {color: #ccc;}
+header{
+	
+	height: 72px; width: 552px; margin: 24px auto 12px auto;
+	text-align: center;
+	padding-top: 108px;
+	}
+header h2{
+	font-style: italic; 
+	/*font-family: "Palatino Linotype", Palatino, Palladio, "URW Palladio L", "Book Antiqua", Baskerville, "Bookman Old Style", "Bitstream Charter", "Nimbus Roman No9 L", Garamond, "Apple Garamond", "ITC Garamond Narrow", "New Century Schoolbook", "Century Schoolbook", "Century Schoolbook L", Georgia, serif; */
+	font-family:arial, helvetica;
+	text-transform:lowercase; 
+	font-size: 20px;
+	margin-top: -24px;
+	letter-spacing: 0.05em;
+	}
+
+/******************************************************************************
+	About
+*******************************************************************************/
+#intake article, #clinician aside{margin-top:48px;}
+#current{ margin-top: 72px; }
+#current hgroup{min-height: 72px;}
+#current>div{border-left: solid #ccc 1px; margin-left: -13px;}
+#current>div>*{margin-left: 12px;}
+#current h4.second{ margin-top:23px; }
+h4 + em, h4 + small{ margin-top:-24px; display: block; font-size: 16px; margin-bottom: 24px; color: #666; }
+
+
+span.tall{font: 12px; letter-spacing: .1em; margin-left: 5px; padding: 0; text-transform: uppercase;}
+
+
+/******************************************************************************
+	Clinician
+*******************************************************************************/
+#accordion #clinician{-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.3); -moz-box-shadow: 0 1px 1px rgba(0,0,0,.3); box-shadow: 0 1px 1px rgba(0,0,0,.3);}
+.tab_container{height: 1280px; width: 1040px; -webkit-box-shadow: 0 1px 3px rgba(0,0,0,.3); -moz-box-shadow: 0 1px 3px rgba(0,0,0,.3); box-shadow: 0 1px 3px rgba(0,0,0,.3);}
+.photos{height:528px;}
+
+#intake-main-image1
+{
+	padding-left: 8px;
+	padding-top: 20px;
+}
+
+ul.tabs	{ margin: 0px 0 0 24px; }
+ul.tabs li {}
+ul.tabs li {
+	float: left;
+	text-align: center;
+	height: 48px;
+	padding: 0 12px;
+	margin: 6px 0px -24px  6px;
+	border: 0;
+	font: 14px;
+	text-transform: uppercase;
+	line-height: 24px;
+	-webkit-border-top-right-radius: 12px; -webkit-border-top-left-radius: 12px;
+	-moz-border-radius-topright: 12px; -moz-border-radius-topleft: 12px;
+	border-top-left-radius: 12px; border-top-right-radius: 12px;
+	-webkit-box-shadow: 0 -1px 3px rgba(0,0,0,.2); -moz-box-shadow: 0px -1px 3px rgba(0,0,0,.2); box-shadow: 0 -1px 3px rgba(0,0,0,.2);
+	}
+ul.tabs li a, ul.tabs li.active {
+	margin-top: 0px; 
+	display: block; 
+	text-decoration: none; 
+	border: 0;
+	}
+ul.tabs li:hover, ul.tabs li.active{
+	background: rgba(132,178,150, 1);
+	-webkit-box-shadow: 0 -1px 1px rgba(0,0,0,.3); -moz-box-shadow: 0px -1px 1px rgba(0,0,0,.4); box-shadow: 0 -1px 1px rgba(0,0,0,.3);
+	} 
+
+ul.tabs li.active a
+{	
+	color: #000;
+}
+
+#accordion .clinician .tab_container 
+{
+	position: relative;
+}
+
+.tab_container{ float: left; clear: both; }
+.tab_container article{margin: 12px 12px 6px 0px;}
+
+#assessment h1 + ul{width: 192px; margin:0 24px 0 0; float: left;}
+#assessment h2, #tab1 h3{margin-bottom: 0px;}
+
+#tab4 hgroup{margin-bottom: 24px;}
+#assessment ul .caps{}
+#assessment ul{margin:48px 0 0 0px;}
+#assessment ul li{font-size: 14px; line-height: 24px;}
+
+.tab_container .r6 hgroup, .tab_container .r6 > h1{ padding-top: 24px; }
+
+/******************************************************************************
+	Triage
+*******************************************************************************/
+#triage article, #triage form{margin-top:48px; z-index:1000;}
+
+/******************************************************************************
+	Footer
+*******************************************************************************/
+footer{
+	color: #aaa; 
+	height: 72px;
+	text-align: center; 
+	margin-top: 172px;
+	padding-top: 48px;
+	}
+footer a, footer a:visited
+{ 
+	color:#aaa; 
+}
+
+
+
+
+ul.tabs li.intake {
+	float: left;
+	text-align: center;
+	height: 48px;
+	padding: 0 12px;
+	margin: 6px 0px -24px  6px;
+	border: 0;
+	font: 14px;
+	text-transform: uppercase;
+	line-height: 24px;
+	-webkit-border-top-right-radius: 12px; -webkit-border-top-left-radius: 12px;
+	-moz-border-radius-topright: 12px; -moz-border-radius-topleft: 12px;
+	border-top-left-radius: 12px; border-top-right-radius: 12px;
+	-webkit-box-shadow: 0 -1px 3px rgba(0,0,0,.2); -moz-box-shadow: 0px -1px 3px rgba(0,0,0,.2); box-shadow: 0 -1px 3px rgba(0,0,0,.2);
+	}
+ul.tabs li.intake.active {
+	background: rgba(255,206,143, 1);
+	margin-top: 0px; 
+	display: block; 
+	text-decoration: none; 
+	border: 0;
+	}
+
+ul.tabs li.intake a, li.triage a,li.clinician a,li.lab_pharmacy a, li.exit a{
+	/*background: rgba(255,181,99, 1);*/
+	margin-top: 0px; 
+	display: block; 
+	text-decoration: none; 
+	border: 0;
+	}
+
+ul.tabs li.intake:hover, ul.tabs li.intake.active{
+	background: rgba(255,206,143, 1);
+	-webkit-box-shadow: 0 -1px 1px rgba(0,0,0,.3); -moz-box-shadow: 0px -1px 1px rgba(0,0,0,.4); box-shadow: 0 -1px 1px rgba(0,0,0,.3);
+	} 
+
+
+a#intake, a:visited#intake, a:hover#intake
+{
+	color: #444;
+	text-decoration: none; 
+	border-bottom: solid 1px #FFCE86;
+}
+
+
+span#intake
+{
+	background:#FFCE86;
+}
+
+/**8888888888888888888888888888888888888888888888888888888888888*/
+ul.tabs li.triage {
+	float: left;
+	text-align: center;
+	height: 48px;
+	padding: 0 12px;
+	margin: 6px 0px -24px  6px;
+	border: 0;
+	font: 14px;
+	text-transform: uppercase;
+	line-height: 24px;
+	-webkit-border-top-right-radius: 12px; -webkit-border-top-left-radius: 12px;
+	-moz-border-radius-topright: 12px; -moz-border-radius-topleft: 12px;
+	border-top-left-radius: 12px; border-top-right-radius: 12px;
+	-webkit-box-shadow: 0 -1px 3px rgba(0,0,0,.2); -moz-box-shadow: 0px -1px 3px rgba(0,0,0,.2); box-shadow: 0 -1px 3px rgba(0,0,0,.2);
+	}
+ul.tabs li.triage.active {
+	background: rgba(105,157,255, 1);
+	margin-top: 0px; 
+	display: block; 
+	text-decoration: none; 
+	border: 0;
+	}
+
+
+ul.tabs li.triage:hover, ul.tabs li.triage.active{
+	background: rgba(105,157,255, 1);
+	-webkit-box-shadow: 0 -1px 1px rgba(0,0,0,.3); -moz-box-shadow: 0px -1px 1px rgba(0,0,0,.4); box-shadow: 0 -1px 1px rgba(0,0,0,.3);
+	} 
+
+
+a#triage, a:visited#triage, a:hover#triage
+{
+	color: #444;
+	text-decoration: none; 
+	border-bottom: solid 1px #699DFF;
+}
+
+
+span#triage
+{
+	background:#699DFF;
+}
+/**8888888888888888888888888888888888888888888888888888888888888*/
+ul.tabs li.clinician {
+	float: left;
+	text-align: center;
+	height: 48px;
+	padding: 0 12px;
+	margin: 6px 0px -24px  6px;
+	border: 0;
+	font: 14px;
+	text-transform: uppercase;
+	line-height: 24px;
+	-webkit-border-top-right-radius: 12px; -webkit-border-top-left-radius: 12px;
+	-moz-border-radius-topright: 12px; -moz-border-radius-topleft: 12px;
+	border-top-left-radius: 12px; border-top-right-radius: 12px;
+	-webkit-box-shadow: 0 -1px 3px rgba(0,0,0,.2); -moz-box-shadow: 0px -1px 3px rgba(0,0,0,.2); box-shadow: 0 -1px 3px rgba(0,0,0,.2);
+	}
+ul.tabs li.clinician.active {
+	background: rgba(232,106,117, 1);
+	margin-top: 0px; 
+	display: block; 
+	text-decoration: none; 
+	border: 0;
+	}
+
+
+ul.tabs li.clinician:hover, ul.tabs li.clinician.active{
+	background: rgba(232,106,117, 1);
+	-webkit-box-shadow: 0 -1px 1px rgba(0,0,0,.3); -moz-box-shadow: 0px -1px 1px rgba(0,0,0,.4); box-shadow: 0 -1px 1px rgba(0,0,0,.3);
+	} 
+
+
+a#clinician, a:visited#clinician, a:hover#clinician
+{
+	color: #444;
+	text-decoration: none; 
+	border-bottom: solid 1px #E86A75;
+}
+
+
+span#clinician
+{
+	background:#E86A75;
+}
+/**8888888888888888888888888888888888888888888888888888888888888*/
+ul.tabs li.lab_pharmacy {
+	float: left;
+	text-align: center;
+	height: 48px;
+	padding: 0 12px;
+	margin: 6px 0px -24px  6px;
+	border: 0;
+	font: 14px;
+	text-transform: uppercase;
+	line-height: 24px;
+	-webkit-border-top-right-radius: 12px; -webkit-border-top-left-radius: 12px;
+	-moz-border-radius-topright: 12px; -moz-border-radius-topleft: 12px;
+	border-top-left-radius: 12px; border-top-right-radius: 12px;
+	-webkit-box-shadow: 0 -1px 3px rgba(0,0,0,.2); -moz-box-shadow: 0px -1px 3px rgba(0,0,0,.2); box-shadow: 0 -1px 3px rgba(0,0,0,.2);
+	}
+ul.tabs li.lab_pharmacy.active {
+	background: rgba(150,255,194, 1);
+	margin-top: 0px; 
+	display: block; 
+	text-decoration: none; 
+	border: 0;
+	}
+
+
+ul.tabs li.lab_pharmacy:hover, ul.tabs li.lab_pharmacy.active{
+	background: rgba(150,255,194, 1);
+	-webkit-box-shadow: 0 -1px 1px rgba(0,0,0,.3); -moz-box-shadow: 0px -1px 1px rgba(0,0,0,.4); box-shadow: 0 -1px 1px rgba(0,0,0,.3);
+	} 
+
+
+a#lab_pharmacy, a:visited#lab_pharmacy, a:hover#lab_pharmacy
+{
+	color: #444;
+	text-decoration: none; 
+	border-bottom: solid 1px #96FFC2;
+}
+
+
+span#lab_pharmacy
+{
+	background:#96FFC2;
+}
+/**8888888888888888888888888888888888888888888888888888888888888*/
+ul.tabs li.exit {
+	float: left;
+	text-align: center;
+	height: 48px;
+	padding: 0 12px;
+	margin: 6px 0px -24px  6px;
+	border: 0;
+	font: 14px;
+	text-transform: uppercase;
+	line-height: 24px;
+	-webkit-border-top-right-radius: 12px; -webkit-border-top-left-radius: 12px;
+	-moz-border-radius-topright: 12px; -moz-border-radius-topleft: 12px;
+	border-top-left-radius: 12px; border-top-right-radius: 12px;
+	-webkit-box-shadow: 0 -1px 3px rgba(0,0,0,.2); -moz-box-shadow: 0px -1px 3px rgba(0,0,0,.2); box-shadow: 0 -1px 3px rgba(0,0,0,.2);
+	}
+ul.tabs li.exit.active {
+	background:rgba(232,232,209, 1);
+	margin-top: 0px; 
+	display: block; 
+	text-decoration: none; 
+	border: 0;
+	}
+
+
+ul.tabs li.exit:hover, ul.tabs li.exit.active{
+	background: rgba(232,232,209, 1);
+	-webkit-box-shadow: 0 -1px 1px rgba(0,0,0,.3); -moz-box-shadow: 0px -1px 1px rgba(0,0,0,.4); box-shadow: 0 -1px 1px rgba(0,0,0,.3);
+	} 
+
+
+a#exit, a:visited#exit, a:hover#exit
+{
+	color: #444;
+	text-decoration: none; 
+	border-bottom: solid 1px #E8E8D1;
+}
+
+
+span#exit
+{
+	background:#E8E8D1;
+}
+
+
+/****************************************************************/
+/**8888888888888888888888888888888888888888888888888888888888888*/
+ul.tabs li.clinic {
+	float: left;
+	text-align: center;
+	height: 48px;
+	padding: 0 12px;
+	margin: 6px 0px -24px  6px;
+	border: 0;
+	font: 14px;
+	text-transform: uppercase;
+	line-height: 24px;
+	-webkit-border-top-right-radius: 12px; -webkit-border-top-left-radius: 12px;
+	-moz-border-radius-topright: 12px; -moz-border-radius-topleft: 12px;
+	border-top-left-radius: 12px; border-top-right-radius: 12px;
+	-webkit-box-shadow: 0 -1px 3px rgba(0,0,0,.2); -moz-box-shadow: 0px -1px 3px rgba(0,0,0,.2); box-shadow: 0 -1px 3px rgba(0,0,0,.2);
+	}
+ul.tabs li.clinic.active {
+	background:rgba(162,253,245, 1);
+	margin-top: 0px; 
+	display: block; 
+	text-decoration: none; 
+	border: 0;
+	}
+
+
+ul.tabs li.clinic:hover, ul.tabs li.clinic.active{
+	background: rgba(162,253,245, 1);
+	-webkit-box-shadow: 0 -1px 1px rgba(0,0,0,.3); -moz-box-shadow: 0px -1px 1px rgba(0,0,0,.4); box-shadow: 0 -1px 1px rgba(0,0,0,.3);
+	} 
+
+
+a#clinic, a:visited#clinic, a:hover#clinic
+{
+	color: #444;
+	text-decoration: none; 
+	border-bottom: solid 1px #A2FDF5;
+}
+
+
+span#clinic
+{
+	background:#A2FDF5;
+}
+
+
+
+h1#big
+{
+	font-size: 36px;
+}
+
+
+img#logo
+{
+	padding-bottom:500px;
+}
+
+
+
+
+
+
+

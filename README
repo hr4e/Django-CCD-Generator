@@ -1,0 +1,139 @@
+
+Welcome to the HR4E CCD Django Web App
+
+This application is aimed at recording patient information and producing acceptable HL-7 compliant CCD documents.
+Most information collection is done in regions without internet connectivity.
+
+For HR4E, there are five stations used at every clinic abroad (intake,triage,clinician,labs,exit).
+In a clinic, there will be five or more netbooks (each mapped to a station).
+
+The process is as follows:
++Patient is directed to a specific station (1 to many stations):
+	-patient's information is recorded and stored on his/her usb stick via pickle.
++Patient checks out at the exit station:
+	-The exit station loads the data on of the patient's usb stick.
+	-The administrator reviews the patient's data and commits it.
+	-various statistics are recorded and the patient information gets mapped to a CCD XML file.
+
++Specs:
+	-Django 1.3
+	-Python 2.7
+	-No Backing DB
+	-Requires no internet connectivity.
+
+
+
+
+OK, to run the django server
+cd lecodes/projects/hr4e
+python manage.py runserver
+
+OR
+
+cd lecodes/projects/hr4e
+python launcher.py
+
+########################################################### HR4E Installation and Launch ######################################
+###############################################################################################################################
+Install python 2.7 or above.
+Install Django (usually 'sudo easy_install django' on most machines)
+Install Python's lxml module (usually 'sudo easy_install lxml')
+	NOTE: lxml depends on libxml2 and libxslt
+	NOTE: The above command didn't work on the mac. For now, Mac's cannot be exit stations.
+Copy lecodes from a friendly device and paste it into the home directory for your machine. 
+	NOTE: You don't need the lecodes directory, you can just pull the hr4e directory out of there (that's all you need)
+
+########################################################### End Installation ##################################################
+
+########################################################### Launch ############################################################
+Start Django's server inside of your project folder ('cd lecodes/projects/hr4e' and run either 'python launcher.py' or 'sudo python manage.py runserver')
+	NOTE: 'python launcher.py' will launch the server and pop open your default browser to 127.0.0.1:8000 (app. home). 'sudo python manage.py runserver' will just run the app.
+That's it!
+############################################################End Launch #########################################################
+
+########################################################### End HR4E Installation and Launch ####################################
+#################################################################################################################################
+
+
+########################################################### Issues with the mac ##################################################
+Installing python-lxml on the mac is painful...and doesn't work due to some erroneous c-compiler error.
+So! We can't use a mac for any of the exit stations.  
+Also, when bringing the application onto the mac (hr4e directory), you will need to make some changes to the views.py file.
+Mainly, comment out the line 'import lxml as etree' (or something to that extent).
+###################################################################################################################################
+
+
+Website Pages:
+127.0.0.1:8000 (HOME PAGE)
+127.0.0.1:8000/hr4e/ (Main Application Forms)
+127.0.0.1:8000/thumb_error/ (THUMB ERROR PAGE)
+127.0.0.1:8000/thanks/ (Pretty Patient Printing Page)
+127.0.0.1:8000/administrator/ (ADMIN PAGE)
+
+
+
+HR4E:
+
++Static
+	-image files
+	+css
+		+css files
+			-super.css
+	+js
+		+js files
+			-html5.js
+			-hr4e.js
+			-jquery.min.js
++Saxon
+	-the magical black box beast from brazil (don't touch).
+
++z_score_tables
+	-views.py using these tables
+
++tmp
+	-tmp patient for csv saving...
++templates
+	-xml templates
+	+html
+		-contains all the sites html files 
++hr4e_data_model
+	-some helper files that aren't explicitly used.
++patient
+	-part of the django app (don't modify)
++data
+	+csv
+		-contains all csv's from exit station product
+	+patient_data
+		-contains all saxon'd patient xml files (CCD, GreenCCD, patient.xml)
+	+pickles
+		-some blank pickles if needed (don't change these or move them)
++universe
+	-a bunch of text files that represent the universe of...
+	-...medications,immunizations,languages...etc.
+
++Forms.py 
+is where all of the forms are kept.  
+Some forms were hardcoded into the html using django template tags. These were done to achieve specific form behavior.
+
++Views.py is where all of the server side controlling gets done.  
+index(request) is the real monster here...he/she controls the main application forms.
+each page listed above follows its respective method in views.py
+Example: home_page => startup(request), thumb_error => thumb_error(request)
+In order to keep the data through, I had to process a lot of forms using index(request).
+This means I have to use a lot of if statements to catch which form should be processed.
+It looks a little messy, but the behavior is rock solid.
+This file also contains all of the mappings for xml writeouts. I had to hand map each attribute...so I would advise against changing anything related to xml mappings and code mappings.  
+
+
+
+
+
+
+
+
+
+
+
+
+
+

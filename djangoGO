@@ -1,0 +1,6 @@
+#!/bin/bash
+#This script installs Django and all of the project dependencies
+sudo apt-get install python-dev python-setuptools
+sudo easy_install django
+sudo apt-get install python-libxslt1
+sudo apt-get install python-lxml

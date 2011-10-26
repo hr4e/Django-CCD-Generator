@@ -1,0 +1,63 @@
+<!DOCTYPE html> 
+ 
+<html lang="en"> 
+<head> 
+<meta charset="utf-8" /> 
+<!--[if lt IE 9]>
+<script src="/static/js/html5.js"></script>
+<![endif]--> 
+	<title>HR4E Forms</title>
+   	<link rel="shortcut icon" href="static/favicon.ico" > 
+    	<link rel="stylesheet" type="text/css" href="/static/css/super.css" />
+</head>
+
+
+<body class="showgrid"> 
+<div id="options">
+<h3><a href="/administrator/" title="admin"><strong>Administration</strong></a></h3>
+</div> 
+<header> 
+<h1><strong><img src="static/hr4e.png"/></strong></h1><br/>
+<h2>Which station are you going to be today?</h2>
+<br class="clear" />
+<br/>
+<form action="" method ="GET">
+<input type="submit" name="intake_station" value="Intake Station" />
+</form>
+<br/>
+<form action="" method ="GET">
+<input type="submit" name="triage_station" value="Triage Station" />
+</form>
+<br/>
+<form action="" method ="GET">
+<input type="submit" name="clinician_station" value="Clinician Station" />
+</form>
+<br/>
+<form action="" method ="GET">
+<input type="submit" name="lab_pharmacy_station" value="Lab | Pharmacy Station" />
+</form>
+<br/>
+<form action="" method ="GET">
+<input type="submit" name="exit_station" value="Exit Station" />
+</form>
+	
+
+ <br class="clear" /><br class="clear" /><br class="clear" />
+<br/>
+
+<footer class="r15"> 
+<small><a href="http://www.hr4e.org" title="HR4E">HR4E </a></small> 
+</footer> 
+ 
+<!-- OK, notice {{ station }}.
+{{ station }} will load the appropriate accordion section [0,4] for each section above
+IE: {{ station }} = 0 means that the Intake Station will load.
+-->
+<script type="text/javascript"> 
+var parentAccordion=new TINY.accordion.slider("parentAccordion");
+parentAccordion.init("accordion","h1",0,{{ station }}, "accordion-selected");
+</script> 
+ 
+</body> 
+</html>
+

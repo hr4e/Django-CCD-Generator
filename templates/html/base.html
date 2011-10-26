@@ -1,0 +1,191 @@
+<!DOCTYPE html> 
+ 
+<html lang="en"> 
+<head> 
+<meta charset="utf-8" /> 
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]--> 
+	<title>{% block title %}{% endblock %}</title>
+   	<link rel="shortcut icon" href="assets/images/favicon.ico" > 
+   	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> 
+    	<script type="text/javascript" src="/static/js/hr4e.js"></script> 
+    	<link rel="stylesheet" type="text/css" href="/static/css/super.css" />
+</head>
+<body class="showgrid"> 
+<div id="options"><a href="javascript:parentAccordion.pr(1)"><em>Open all</em></a> <br /><a href="javascript:parentAccordion.pr(-1)"><em>Close all</em></a></div> 
+<header> 
+	<hgroup> 
+		<h1>CMPS 102</h1> 
+		<h2>algorithm analysis</h2> 
+		<h3>UCSC -- Spring 2011</h3> 
+	</hgroup> 
+</header> 
+ 
+<div class="accordion" id="accordion"> 
+ 
+<section class="intake">	
+<!-- ******************************************************************************************	 						intake								
+-->
+{% include "intake.html" %}
+
+</section> 
+
+
+<section class="triage"> 
+<!-- ******************************************************************************************
+					Triage		
+-->	
+{% include "triage.html" %}
+
+</section>
+
+
+
+
+
+
+ 
+ 
+<section class="about"> 
+<!-- ******************************************************************************************
+					Triage		
+-->	 
+    
+<h1 title="click to view or hide the work info"><span>About</span></h1> 
+<div class="accordion-section" id="about" style="height:0px"> 
+	<nav> 
+	<ul class="tabs"> 
+		<li><a href="#tab1" title="course description">Course Description</a></li> 
+		<li><a href="#tab2" title="course information">Course Information</a></li> 
+		<li><a href="#tab3" title="course materials">Course Materials</a></li> 
+    </ul> 
+    </nav> 
+<div class="tab_container"> 
+	<article id="tab1" class="tab_content"> 
+	<div class="r8 left"> 
+		<div id="about-main-image1"> 
+			<img src="assets/images/warped.png" width="500" /> 
+		</div>	
+	</div> 
+	<div class="r6"> 
+		<h1>Course Description:</h1> 
+			<p>Methods for the systematic construction and mathematical analysis of algorithms. Order notation, the RAM model of computation, lower bounds, and recurrence relations are covered. The algorithm design techniques include divide-and-conquer, branch and bound, and dynamic programming. 
+			Applications to combinatorial, graph, string, and geometric algorithms.</p> 
+			<p> 
+			The aim of the course is to make you comfortable with the basic methods involved in the design and analysis of algorithms.
+			</p> 
+		<br class="clear" /> 
+	</div> 
+	<br class="clear" /> 
+	</article> 
+	
+	
+	<article id="tab2" class="tab_content"> 
+	<div class="r8 left"> 
+		<div id="about-main-image2"><img src="assets/images/map.jpg" /></div> 
+		<br class="clear" /> 
+	</div> 
+	<div class="r6"> 
+		<hgroup> 
+			<h1>Course Information:</h1> 
+		</hgroup> 
+		<ul> strong>Lecture | Section:</strong> 
+			<li>Tu - Th 12:00p - 1:45p at <a href ="http://maps.ucsc.edu/cmcommunications.html" target="_blank">Physical Sciences 114</a></li> 
+			<li>Wed. 11:00a - 12:10p at <a href ="http://maps.ucsc.edu/cmcommunications.html" target="_blank">Engineering 2 194</a></li> 
+			<li>(3/28 - 06/03)</li> 
+		</ul> 
+		<ul> <strong>Instructor | TA:</strong> 
+			<li><a href="http://users.soe.ucsc.edu/~optas/" target="_blank">Dimitris Achlioptas</a></li> 
+			<li><a href="http://users.soe.ucsc.edu/~againer/" target="_blank">Alex Gainer</a></li> 
+		</ul> 
+		<ul> <strong>Office Hours:</strong> 
+			<li>Alex -- Wed. 10a - 11a -- Jack's Lounge</li> 
+			<li>Dimitris -- Tue. 11a - 12p (or by appointment) -- E2-343A</li> 
+		</ul> 		
+	</div> 
+	<br class="clear" /> 
+	
+	</article> 
+	
+	
+	<article id="tab3" class="tab_content"> 
+	<div class="r8 left"> 
+		<div id="about-main-image3"><img src="assets/images/Tardos.jpg" /></div> 
+	</div> 
+	<div class="r6"> 
+		<hgroup><h1><a href ="http://www.aw-bc.com/info/kleinberg/" target="_blank">Tardos and Kleinberg</a></h1> 
+		</hgroup> 
+		<p> 
+		The core of the course will be based on a subset of the book by Kleinberg and Tardos titled Algorithm Design (required text -- available for sale at the university bookstore).
+		</p> 
+		<ul><strong>Materials:</strong> 
+			<li><a href="assets/materials/syllabus.pdf">Syllabus</a></li> 
+		</ul> 
+		<ul><strong>Supplements:</strong> 
+			<li><a href = "assets/materials/TantaloInd.pdf" target="_blank">Tantalo Lecture Notes</a></li> 
+			<li><a href = "http://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-046j-introduction-to-algorithms-sma-5503-fall-2005/" target="_blank">MIT OCW Introduction to Algorithm Analysis</a></li> 
+		</ul> 
+	</div> 
+	<br class="clear" /> 
+	</article> 
+	<br class="clear" /> 
+</div> <!--tab container --> 
+	<br class="clear" /> 
+</div><!--acc section --> 
+</section> 
+ 
+ 
+ 
+
+
+
+
+
+ 
+ 
+ 
+<section class="contact">	
+<!-- ******************************************************************************************
+										Contact		 
+     ****************************************************************************************** --> 
+<h1 title="click to view or hide my contact info"><span>Contact</span></h1> 
+<div class="accordion-section" id="contact" style="height:0px"> <!--to hide style="height:0px" onload--> 
+	
+	<article class="r14 left"> 
+		<h1>Hello World</h1> 
+	<div id="connect"> 
+		<ul> 
+		<li><h2>Email</h2></li><br class="clear" /> 
+		<li class="link-email large"><a href="mailto:optas@cs.ucsc.edu">optas {at} cs.ucsc.edu</a></li><br class="clear" /> 
+		<li class="link-email large"><a href="mailto:againer@soe.ucsc.edu">againer {at} soe.ucsc.edu</a></li><br class="clear" /> 
+		</ul> 
+		</div> 
+	</article> 
+ 
+<br class="clear" /> 
+</div> 
+<!-- accordion section --> 
+</section> 
+ 
+</div> 
+<!-- class="accordion" id="accordion" --> 
+<br class="clear" /> 
+ 
+ 
+<!-- ******************************************************************************************
+										Footer		 
+     ****************************************************************************************** --> 
+<footer class="r15"> 
+<small><a href="http://www.soe.ucsc.edu/index.php" title="UCSC">College of Engineering -- UCSC </a></small> 
+</footer> 
+ 
+ 
+<script type="text/javascript"> 
+var parentAccordion=new TINY.accordion.slider("parentAccordion");
+parentAccordion.init("accordion","h1",0,-1, "accordion-selected");
+</script> 
+ 
+</body> 
+</html>
+

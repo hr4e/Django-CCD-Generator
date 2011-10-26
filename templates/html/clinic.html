@@ -1,0 +1,192 @@
+<h1 title="clinic"><span id = "clinic"><a id="clinic" name="clinic"><strong>Clinic Settings</strong></a></span></h1>
+<div class="accordion-section" id="clinic" style="height:0px"> <!--to hide style="height:0px" onload--> 
+	<nav>
+		<ul class="tabs"> 
+			<li class ="clinic"><a href="#clinic_settings" title="Basic Settings">Basic Settings</a></li> 
+			<li class ="clinic"><a href="#clinic_languages" title="Languages">Languages</a></li> 
+			<li class ="clinic"><a href="#clinic_immunizations" title="Immunizations">Immunizations</a></li> 
+			<!-- Review data might just be a link to the exit station -->
+			<li class ="clinic"><a href="#clinic_medications" title="Medications">Medications</a></li> 
+	    	</ul> 
+    	</nav> 
+	<div class ="tab_container">
+		<article class ="tab_content" id = "clinic_settings">
+		<div class = "r4 left">
+		<h3>Edit Basic Settings: </h4>
+		<!--<form action="" method="POST">-->
+			<form action="" method ="POST">
+				<ul>
+				{% for field in basicSettings %}
+	       				<li>
+		    				{% if field.errors %}<font color="red"> {{ field.errors }} </font>{% endif %}
+		    				<strong>{{ field.label_tag }}:</strong><br/> {{ field }}
+					</li>
+	    			{% endfor %}
+				<ul>
+				<br/>
+				<div>
+				<input type="submit" name="update_basic_settings" value="Update Basic Settings" />	
+				
+				</div>
+			</form>
+		</div>
+		<div class ="r4">
+			
+		</div>
+		
+		<div class ="r6">
+			<h3>Basic Settings:</h3>
+			<ul>
+				<li><strong>Name: </strong>{{ clinic.name }}</li>
+				<li><strong>Details: </strong>{{ clinic.details }}</li> 
+				<li><strong>GPS: </strong>{{ clinic.gps }}</li>
+				<li><strong>Start Date: </strong>{{ clinic.start_date }}</li>
+				<li><strong>End Date: </strong>{{ clinic.end_date }}</li>
+				<li><strong>Time Zone: </strong>{{ clinic.time_zone }}</li>
+				<li><strong>Custodian Name: </strong>{{ clinic.custodian_name }}</li>
+				<li><strong>Custodian ID: </strong>{{ clinic.custodian_id }}</li>
+				<li><strong>Author: </strong>{{ clinic.author_prefix }} {{ clinic.author_first_name }} {{ clinic.author_last_name }}</li>
+				<li><strong>Role: </strong>{{ clinic.role }}</li>
+				<li><strong>System: </strong>{{ clinic.system }}</li>
+				<li><strong>Provider: </strong>{{ clinic.provider_prefix }} {{ clinic.provider_first_name }} {{ clinic.provider_last_name }}</li>
+				<li><strong>Provider Name: </strong>{{ clinic.provider_name }}</li>
+				<li><strong>Provider ID: </strong>{{ clinic.provider_id }}</li>
+			</ul>
+			
+		</div>
+		</article>
+
+<!--end .r8 left intake_information --> 
+		<article class ="tab_content" id = "clinic_languages">
+		<div class = "r4 left">
+			<h3>Add Clinic Languages: </h4>
+			<form action="" method ="POST">
+				<ul>
+				{% for field in clinicLanguages %}
+	       				<li>
+						
+		    				{% if field.errors %}<font color="red"> {{ field.errors }} </font>{% endif %}
+		    				<strong>{{ field.label_tag }}:</strong><br/> {{ field }}
+					</li>
+	    			{% endfor %}
+				<ul>
+				<br/>
+			<input type="submit" name="add_languages" value="Add Language(s)" />
+				
+			</form>
+		</div>
+		<!--</form> End of encapsulation form form -->
+		<div class ="r4">
+			
+		</div>
+		<div class = "r6">
+			<h3>Remove Languages:</h3>
+			<form action ="" method="POST">
+				<ul>
+				{% for language in clinic.languages %}
+					<li>	{% for title,value in language.items %}
+						<strong>{{ title }}: </strong>  {{ value }} <br/>
+						{% endfor %}
+						<input type ="checkbox" name = "language" value= "{{forloop.counter0}}"/><br/>
+					</li>
+					<br/>
+					{% empty %}
+						<li><strong>HR4E has no set languages.</strong></li>
+				{% endfor %}
+			</ul>
+				<input type="submit" name="remove_languages" value="Remove Language(s)"/>
+			</form>
+		</div>
+		</article>
+		<article class ="tab_content" id = "clinic_immunizations">
+		<div class = "r8 left">
+			<h3>Add Clinic Immunizations: </h4>
+		<!--<form action="" method="POST">-->
+			<form action="" method ="POST">
+				<ul>
+				{% for field in immunizationForm %}
+	       				<li>
+		    				{% if field.errors %}<font color="red"> {{ field.errors }} </font>{% endif %}
+		    				<strong>{{ field.label_tag }}:</strong><br/> {{ field }}
+					</li>
+	    			{% endfor %}
+				<ul>
+				<br/>
+				<div>
+				<input type="submit" name="add_immunizations" value="Add Immunization(s)" />	
+				
+				</div>
+			</form>
+		</div>
+		<div class ="r4">
+			
+		</div>
+		<div class = "r6">
+		<h3>Remove Immunizations:</h3>
+			<form action ="" method="POST">
+				<ul>
+				{% for immunization in clinic.immunizations %}
+					<li>	
+						<strong>Immunization {{ forloop.counter0 }} : </strong>  {{ immunization }} <br/>
+						<input type ="checkbox" name = "immunization" value= "{{forloop.counter0}}"/><br/>
+					</li>
+					<br/>
+					{% empty %}
+						<li><strong>HR4E has no set immunizations.</strong></li>
+				{% endfor %}
+			</ul>
+				<input type="submit" name="remove_immunizations" value="Remove Immunization(s)"/>
+			</form>
+				
+		</div>
+		</article>
+		<article class ="tab_content" id = "clinic_medications">
+		<div class = "r4 left">
+		<h3>Edit Basic Settings: </h4>
+		<!--<form action="" method="POST">-->
+			<form action="" method ="POST">
+				<ul>
+				{% for field in medicationForm %}
+	       				<li>
+		    				{% if field.errors %}<font color="red"> {{ field.errors }} </font>{% endif %}
+		    				<strong>{{ field.label_tag }}:</strong><br/> {{ field }}
+					</li>
+	    			{% endfor %}
+				<ul>
+				<br/>
+				<div>
+				<input type="submit" name="add_medications" value="Add Medication(s)" />	
+				
+				</div>
+			</form>
+		</div>
+		<div class ="r4">
+			
+		</div>
+		<div class = "r6">
+		<h3>Remove Medications:</h3>
+			<form action ="" method="POST">
+				<ul>
+				{% for medication in clinic.medications %}
+					<li>	
+						<strong>Medication {{ forloop.counter0 }} : </strong>  {{ medication }} <br/>
+						<input type ="checkbox" name = "medication" value= "{{forloop.counter0}}"/><br/>
+					</li>
+					<br/>
+					{% empty %}
+						<li><strong>HR4E has no set medications...</strong></li>
+				{% endfor %}
+			</ul>
+				<input type="submit" name="remove_medications" value="Remove Medications(s)"/>
+			</form>
+				
+		</div>
+		</article>
+		
+		
+ 	</div> <!-- end tab container div-->
+<br class="clear" /> 
+</div> <!-- accordion section --> 
+
+
+

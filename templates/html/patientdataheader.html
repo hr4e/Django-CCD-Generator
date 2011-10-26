@@ -1,0 +1,17 @@
+<div class = "r6 left">
+<strong>Patient:</strong> {{ patient.family_name }} , {{ patient.given_name }} <br/>
+{{ patient.stated_age }} old {{ patient.gender }} <br/>
+<strong>Ht</strong>: {{ patient.height }} cm, <strong>Wt</strong>: {{ patient.weight }} kg, <strong>BMI:</strong> {{ patient.bmi }}, <strong>Z-score: </strong>{{ patient.z_score }} <br/> 
+
+</div>
+
+<div class = "r6">
+
+<strong>Languages: </strong>{% for language in patient.languages %}{{ language }} ,  {% endfor %}<br/>
+{{ patient.school }} / {{ patient.teacher }} <br/>
+<strong>Grade:</strong> {{ patient.school_year }} <br/>
+
+
+</div>
+<br class="clear" /> 
+

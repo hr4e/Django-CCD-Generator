@@ -1,0 +1,210 @@
+<h1 title="click to view or hide the Clinician info"><span id = "clinician"><a id="clinician" name="clinician"><strong>Clinician Station</strong></a></span></h1> 
+<div class="accordion-section" id="clinician" style="height:0px"> 
+	<nav> 
+	<ul class="tabs"> 
+		<li class="clinician"><a href="#tests" title="tests">Tests</a></li> 
+		<li class="clinician"><a href="#findings" title="Other Findings">Findings</a></li> 
+		<li class="clinician"><a href="#assessment" title="Assessment">Assessment</a></li> 
+		<li class="clinician"><a href="#planofcare" title="Plan of Care">Plan</a></li> 
+		<li class="clinician"><a href="#clinic_review" title="Review">Review</a></li> 
+    </ul> 
+    </nav> 
+<div class="tab_container"> 
+
+	<article id="tests" class="tab_content"> 
+	{% include "patientdataheader.html" %}
+	<div class="r6 left"> 
+				<h3>Edit Test Results: </h4>
+				<form action="" method ="POST">
+					<ul>
+					{% for field in testResultsForm %}
+		       				<li>
+			    				{{ field.errors }}
+			    				{{ field.label_tag }}:<br/> {{ field }}
+						</li>
+		    			{% endfor %}
+					<ul>
+				<br/>
+				<input type="submit" name="update_test_results" value="Update Test Results" />
+				
+			</form>
+			</div>
+			
+			<div class = "r6">
+			<h3>Remove Past Test Results: </h3>
+			<form action ="" method="POST">
+				<ul>
+				{% for result in patient.test_results %}
+					<li> {% for title,value in result.items %}
+						<strong>{{ title }}</strong> : {{ value }} <br/>
+						{% endfor %}
+						<input type ="checkbox" name = "result" value= "{{forloop.counter0}}"/><br/>
+					</li>
+					<br/>
+
+				{% endfor %}
+			</ul>
+				<input type="submit" name="remove_result" value="Remove Result(s)"/>
+			</form>
+		
+			</div>
+	
+	</article> 	
+
+	<article id="findings" class="tab_content"> 
+		{% include "patientdataheader.html" %}
+			<div class="r4 left"> 
+				<h3>Edit Other Findings: </h4>
+				<form action="" method ="POST">
+					<ul>
+					{% for field in findingsForm %}
+		       				<li>
+			    				{{ field.errors }}
+			    				{{ field }}
+						</li>
+		    			{% endfor %}
+					<ul>
+				<br/>
+				<input type="submit" name="update_other_findings" value="Update Other Findings" />
+				
+			</form>
+			</div>
+			
+			<div class = "r4"></div>
+			
+			<div class = "r6">
+				<h3>Other Findings: </h3><br/>
+				<p>{{ patient.other_findings }} </p>
+			</div>
+	
+	</article> 	
+
+	<article id="assessment" class="tab_content"> 
+	{% include "patientdataheader.html" %}
+	
+			<div class="r4 left"> 
+				<h3>Add Assessments: </h4>
+				<form action="" method ="POST">
+					<ul>
+					{% for field in assessmentForm %}
+		       				<li>
+			    				{{ field.errors }}
+			    				<strong>{{ field.label_tag }}:</strong><br/> {{ field }}
+						</li><br/>
+		    			{% endfor %}
+					<ul>
+				<br/>
+				<input type="submit" name="update_assessments" value="Add Assessment" />
+				
+			</form>
+			</div>
+			
+			<div class = "r4"></div>
+			
+			<div class= "r6">
+
+			<h3>Remove Condition(s): </h3>
+			<form action ="" method="POST">
+				<ul>
+				{% for assessment in patient.assessments %}
+					<li> {% for title,value in assessment.items %}
+						<strong>{{ title }}</strong> : {{ value }} <br/>
+						{% endfor %}
+						<input type ="checkbox" name = "assess" value= "{{forloop.counter0}}"/><br/>
+					</li>
+					<br/>
+					{% empty %}
+						<li><strong>No conditions have been identified.</strong></li>
+				{% endfor %}
+			</ul>
+				<input type="submit" name="remove_conditions" value="Remove Condition(s)"/>
+			</form>
+
+
+			</div> 
+	</article> 
+
+	<article id="planofcare" class="tab_content"> 
+	{% include "patientdataheader.html" %}
+	<div class="r8 left"> 
+				<h3>Add Plan: </h4>
+				<form action="" method ="POST">
+					<ul>
+					{% for field in plan_of_care %}
+		       				<li>
+			    				{{ field.errors }}
+			    				{{ field.label_tag }}:<br/> {{ field }}
+						</li>
+		    			{% endfor %}
+					<ul>
+				<br/>
+				<input type="submit" name="update_plan_of_care" value="Add a Plan" />
+				
+			</form>
+			</div>
+			
+			<div class = "r4"></div>
+			
+			<div class = "r6">
+			<h3>Remove plan(s): </h3>
+			<form action ="" method="POST">
+				<ul>
+				{% for plan in patient.plans_of_care %}
+					<li> {% for title,value in plan.items %}
+						<strong>{{ title }}</strong> : {{ value }} <br/>
+						{% endfor %}
+						<input type ="checkbox" name = "plan" value= "{{forloop.counter0}}"/><br/>
+					</li>
+					<br/>
+
+				{% endfor %}
+			</ul>
+				<input type="submit" name="remove_plan" value="Remove Plan(s)"/>
+			</form>
+		
+			</div>
+	
+	</article> 
+	<article id="clinic_review" class="tab_content"> 
+	{% include "patientdataheader.html" %}	
+		<div class = "r6 left">
+			<h3>Other Findings: </h3><br/>
+			<p>{{ patient.other_findings }} </p><br/><br/><br/><br/>
+				<h3>Test Results:</h3>
+				<ul>
+				{% for test in patient.test_results %}
+					<li> {% for title,value in test.items %}
+						<strong>{{ title }}</strong> : {{ value }} <br/>
+						{% endfor %}
+					</li>
+					<br/>
+
+				{% endfor %}
+			</ul>
+		</div>
+		<div class = "r6">
+				<h3>Assessments:</h3>
+				<ul>
+					{% for assessment in patient.assessments %}
+						{% for key,value in assessment.items %}
+							<li><strong> {{ key }} : </strong> {{ value }} </li>
+						{% endfor %}
+						<br/>
+					{% endfor %}
+				</ul>
+				<h3> Plan of Care:</h3>
+				<ul>
+					{% for plan in patient.plans_of_care %}
+						{% for key,value in plan.items %}
+							<li><strong> {{ key }} : </strong> {{ value }} </li>
+						{% endfor %}
+						<br/>
+					{% endfor %}
+				</ul>
+			</div>
+	</article> 
+	<br class="clear" /> 
+</div> <!--tab container --> 
+	<br class="clear" /> 
+	<h1>Welcome to the Clinician Station</h1>
+</div><!--acc section --> 

@@ -1,0 +1,225 @@
+<h1 title="triage"><span id="triage"><a id = "triage" name="triage"><strong>Triage Station</strong></a></span></h1> 
+<div class="accordion-section" id="triage" style="height:0px"> <!--to hide style="height:0px" onload--> 
+	<nav>
+		<ul class="tabs"> 
+			<li class= "triage"><a href="#chief_complaints" title="CC">Chief Complaints</a></li> 
+			<li class= "triage"><a href="#vitals" title="Vitals">Vitals</a></li> 
+			<li class= "triage"><a href="#red_flags" title="Red Flags">Red Flags</a></li> 
+			<li class= "triage"><a href="#vaccinations" title="Vaccines">Vaccines</a></li> 
+			<li class= "triage"><a href="#triage_review" title="triage_review">Review</a></li>
+	    	</ul> 
+    	</nav> 
+	<div class="tab_container"> 
+		<article id="chief_complaints" class="tab_content"> 
+			{% include "patientdataheader.html" %}
+			<div class="r4 left"> 
+				<h3>Edit Chief Complaint: </h4>
+				<form action="" method ="POST">
+					<ul>
+					{% for field in chiefComplaint %}
+		       				<li>
+			    				{{ field.errors }}
+			    				{{ field }}
+						</li>
+		    			{% endfor %}
+					<ul>
+				<br/>
+				<input type="submit" name="update_chief_complaint" value="Update CC" />
+				
+			</form>
+			</div>
+			
+			<div class = "r4"></div>
+			
+			<div class = "r6">
+				<h3>Chief Complaint: </h3><br/>
+				<p>{{ patient.chief_complaint }} </p>
+			</div>
+		</article> 
+
+		<article id="vitals" class="tab_content"> 
+			{% include "patientdataheader.html" %}
+			<div class="r6 left"> 
+				<h3>Edit Vitals: </h4>
+				<form action="" method ="POST">
+				
+					<ul>
+					{% for field in vitals %}
+		       				<li>
+			    				{{ field.errors }}
+			    				{{ field.label_tag }}:<br/> {{ field }}
+						</li>
+		    			{% endfor %}
+					<ul>
+				<br/>
+				<input type="submit" name="update_vitals" value="Update Vitals" />
+				
+			</form>
+			</div>
+			<div class= "r6">
+
+			<h3>Remove Vitals: </h3>
+			<form action ="" method="POST">
+				<ul>
+				{% for vital in patient.vitals %}
+					<li> {% for title,value in vital.items %}
+						<strong>{{ title }}</strong> : {{ value }} <br/>
+						{% endfor %}
+						<input type ="checkbox" name = "vital" value= "{{forloop.counter0}}"/><br/>
+					</li>
+					<br/>
+					{% empty %}
+						<li><strong>No vitals have been taken.</strong></li>
+				{% endfor %}
+			</ul>
+				<input type="submit" name="remove_vitals" value="Remove Vitals"/>
+			</form>
+
+
+			</div> 
+		</article> 
+		<article id="red_flags" class="tab_content"> 
+			{% include "patientdataheader.html" %}
+			<div class="r6 left"> 
+				<h3><strong>Edit Red Flags:</strong></h3>
+				<form action="" method ="POST">
+					<ul>
+					{% for field in red_flags %}
+		       				<li>
+			    				<font color = "red">{{ field.errors }}</font>
+			    				<strong>{{ field.label_tag }}:</strong><br/> {{ field }}
+						</li><br/>
+		    			{% endfor %}
+					<ul>
+				<br/>
+				<input type="submit" name="update_red_flags" value="Update Red Flags" />
+				
+			</form>
+			</div>
+			
+			<div class= "r6">
+
+			<h3>Remove Condition(s): </h3>
+			<form action ="" method="POST">
+				<ul>
+				{% for assessment in patient.assessments %}
+					<li> {% for title,value in assessment.items %}
+						<strong>{{ title }}</strong> : {{ value }} <br/>
+						{% endfor %}
+						<input type ="checkbox" name = "condition" value= "{{forloop.counter0}}"/><br/>
+					</li>
+					<br/>
+					{% empty %}
+						<li><strong>No conditions have been identified</strong></li>
+				{% endfor %}
+			</ul>
+				<input type="submit" name="remove_red_flags" value="Remove Condition(s)"/>
+			</form>
+
+
+			</div> 
+		</article> 
+	
+	
+		<article id="vaccinations" class="tab_content"> 
+			{% include "patientdataheader.html" %}
+			<div class="r6 left"> 
+				<h3>Edit Vaccinations: </h3>
+				<form action="" method ="POST">
+					<ul>
+					{% for field in vaccinations %}
+		       				<li>
+			    				{{ field.errors }}
+			    				{{ field.label_tag }}:<br/> {{ field }}
+						</li>
+						<br/>
+		    			{% endfor %}
+					<ul>
+				<br/><br/>
+				<input type="submit" name="update_vaccinations" value="Update Vaccinations" />
+				
+			</form>
+			</div>
+			<div class = "r4">
+				<h3>Remove Vitals: </h3>
+			<form action ="" method="POST">
+				<ul>
+				{% for vaccination in patient.vaccinations %}
+					<li> {% for title,value in vaccination.items %}
+						<strong>{{ value }}</strong> : {{ title }} <br/>
+						{% endfor %}
+						<input type ="checkbox" name = "vaccination" value= "{{forloop.counter0}}"/><br/>
+					</li>
+					<br/>
+					{% empty %}
+						<li><strong>This patient has not receieved any vaccinations.</strong></li>
+				{% endfor %}
+			</ul>
+				<input type="submit" name="remove_vaccinations" value="Remove Vaccination(s)"/>
+			</form>
+			</div>
+			<!--
+			<div class = "r6">
+				<h3>WHO Vaccinations Given:</h3>
+				<ul>
+					{% for vaccination in patient.vaccinations %}
+						{% for key,value in vaccination.items %}
+							<li><strong> {{ value }} : </strong> {{ key }} </li><br/>
+						{% endfor %}
+					{% endfor %}
+				</ul>
+			</div>
+			-->
+		</article> 
+		<article id="triage_review" class="tab_content"> 
+			{% include "patientdataheader.html" %}
+			<div class = "r6 left">
+				<h3>Chief Complaint: </h3><br/>
+				<p>{{ patient.chief_complaint }} </p><br/><br/><br/><br/>
+				<h3>Vitals Taken:</h3>
+				<ul>
+				{% for vital in patient.vitals %}
+					<li> {% for title,value in vital.items %}
+						<strong>{{ title }}</strong> : {{ value }} <br/>
+						{% endfor %}
+					</li>
+					<br/>
+					{% empty %}
+						<li><strong>No vitals have been taken.</strong></li>
+				{% endfor %}
+			</ul>
+			</div>
+			<div class = "r6">
+				<h3>Vaccinations Given:</h3>
+				<ul>
+					{% for vaccination in patient.vaccinations %}
+						{% for key,value in vaccination.items %}
+							<li><strong> {{ value }} : </strong> {{ key }} </li><br/>
+						{% endfor %}
+						{% empty %}
+						<li><strong>This patient has no received any vaccinations.</strong></li>
+					{% endfor %}
+				</ul>
+				<h3> Red Flags:</h3>
+				<ul>
+					{% for key,value in patient.red_flags.items %} 
+						{% if value != '-1' %}
+							<li> <strong> {{ key }} </strong> : {{ value }}</li> <br/>
+
+						{% endif %}
+					
+					{% endfor %}
+				</ul>
+			</div>
+		</article> 
+	
+		<br class="clear" /> 
+	</div> <!--tab container --> 
+		<br class="clear" /> 
+	<h1>Welcome to the Triage Station</h1>
+	</div><!--acc section --> 
+	 
+
+
+
+

@@ -4,12 +4,17 @@ Welcome to the HR4E CCD Django Web App
 This application is aimed at recording patient information and producing acceptable HL-7 compliant CCD documents.
 Most information collection is done in regions without internet connectivity.
 
-For HR4E, there are five stations used at every clinic abroad (intake,triage,clinician,labs,exit).
+For HR4E, there are five stations used at every clinic abroad:
+intake,
+triage,
+clinician,
+labs,
+exit.
 In a clinic, there will be five or more netbooks (each mapped to a station).
 
 The process is as follows:
 +Patient is directed to a specific station (1 to many stations):
-	-patient's information is recorded and stored on his/her usb stick via pickle.
+	-patient's information is recorded and stored on his/her usb stick via a Python pickle.
 +Patient checks out at the exit station:
 	-The exit station loads the data on of the patient's usb stick.
 	-The administrator reviews the patient's data and commits it.
@@ -18,19 +23,17 @@ The process is as follows:
 +Specs:
 	-Django 1.3
 	-Python 2.7
-	-No Backing DB
+	-No Backing DB (by request)
 	-Requires no internet connectivity.
 
 
-
-
 OK, to run the django server
-cd lecodes/projects/hr4e
+cd [path to project directory]
 python manage.py runserver
 
 OR
 
-cd lecodes/projects/hr4e
+cd [path to project directory]
 python launcher.py
 
 ########################################################### HR4E Installation and Launch ######################################
@@ -48,7 +51,7 @@ Copy lecodes from a friendly device and paste it into the home directory for you
 ########################################################### Launch ############################################################
 Start Django's server inside of your project folder ('cd lecodes/projects/hr4e' and run either 'python launcher.py' or 'sudo python manage.py runserver')
 	NOTE: 'python launcher.py' will launch the server and pop open your default browser to 127.0.0.1:8000 (app. home). 'sudo python manage.py runserver' will just run the app.
-That's it!
+That's it (assuming you are only using the django devo server).
 ############################################################End Launch #########################################################
 
 ########################################################### End HR4E Installation and Launch ####################################
@@ -67,7 +70,7 @@ Website Pages:
 127.0.0.1:8000 (HOME PAGE)
 127.0.0.1:8000/hr4e/ (Main Application Forms)
 127.0.0.1:8000/thumb_error/ (THUMB ERROR PAGE)
-127.0.0.1:8000/thanks/ (Pretty Patient Printing Page)
+127.0.0.1:8000/thanks/ (Pretty Patient Printing Page (occurs after exit station release))
 127.0.0.1:8000/administrator/ (ADMIN PAGE)
 
 
